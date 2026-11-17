@@ -1,6 +1,6 @@
 # Documentation complète du projet — dossier de soutenance
 
-**Plateforme CTI intelligente et décentralisée** — PFE ENSA Marrakech. Référentiels : `CDC_2I2AY.pdf`,
+**Plateforme CTI intelligente et décentralisée** — projet du module IA avancée et Blockchain, ENSA Marrakech. Référentiels : `CDC_2I2AY.pdf`,
 `Cadrage_Projet_2i2ay.pdf`. Ce document relie toutes les pièces ; chaque chiffre renvoie à un fichier de preuve.
 
 ## 1. Problème et objectifs

@@ -70,7 +70,7 @@ dépendances prend ~10–14 min.
 
 ## 2. Contexte et objectifs
 
-Projet académique ENSA Marrakech (PFE « Plateforme CTI intelligente et décentralisée »), cahier des charges
+Projet académique ENSA Marrakech (projet du module IA avancée et Blockchain, « Plateforme CTI intelligente et décentralisée »), cahier des charges
 `CDC_2I2AY.pdf` + `Cadrage_Projet_2i2ay.pdf` (dans `prj/`). Trois organisations simulées A/B/C partagent des
 rapports CTI : extraction d'IOC, classification ML, enrichissement MITRE ATT&CK, publication MISP, validation
 collective sur Ethereum (Hardhat local), score de fiabilité `S = 0.30R + 0.30Q + 0.40V`, réputation, corrélation,

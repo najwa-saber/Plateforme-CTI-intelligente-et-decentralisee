@@ -26,7 +26,7 @@ Priorisé à partir de `PROJECT_CURRENT_STATE.md`, `AI_ML_NLP_AUDIT.md`, `TESTS_
 Message de commit proposé :
 
 ```
-feat: plateforme CTI intelligente et décentralisée (prototype PFE)
+feat: plateforme CTI intelligente et décentralisée (projet de module IA avancée)
 
 - FastAPI + PostgreSQL (Alembic 0001-0003) : import TXT/PDF/JSON/MISP, extraction et
   normalisation des IOC, doublons, incohérences, classification TF-IDF + régression

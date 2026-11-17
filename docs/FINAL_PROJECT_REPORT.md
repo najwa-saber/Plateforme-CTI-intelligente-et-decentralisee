@@ -61,9 +61,9 @@ Faits le 17/11 après autorisation : rejeu du scénario (24/24) et tests *live* 
 5. Promotion du modèle candidat (métriques identiques, apporte seulement l'empreinte du jeu de données) — facultatif.
 6. Suppression des images de test `cticlean-*` — nettoyage facultatif.
 
-Message de commit proposé :
+Message de commit (le commit initial `05b64df` porte encore la mention « (PFE) », inexacte : il s'agit d'un projet du module IA avancée ; la corriger exigerait de réécrire l'historique publié) :
 ```
-feat: plateforme CTI intelligente et décentralisée (PFE)
+feat: plateforme CTI intelligente et décentralisée (projet de module IA avancée)
 
 FastAPI/PostgreSQL (Alembic 0001-0003), extraction IOC, classification TF-IDF + LR,
 enrichissement MITRE ATT&CK, MISP (PyMISP), validation par smart contract Solidity
