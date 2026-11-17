@@ -4,7 +4,10 @@ Dernière mise à jour : **17/11/2026, fin de la session « mission finale »**.
 Bilan détaillé : [`FINAL_PROJECT_REPORT.md`](FINAL_PROJECT_REPORT.md) · reprise : [`CLAUDE_HANDOFF.md`](CLAUDE_HANDOFF.md) ·
 feuille de route d'origine conservée : [`FINALIZATION_ROADMAP.md`](FINALIZATION_ROADMAP.md).
 
-> **PROCHAINE TÂCHE** : lire le résultat du premier pipeline GitLab (déclenché par le push de `1aa1d38` le 17/11),
+> **ÉTAT CI** : pipeline #3078904924 (`4d10748`) — 10/10 jobs automatiques réussis ; statut global « manuel » corrigé
+> dans `.gitlab-ci.yml` (commit et push à autoriser), à confirmer au pipeline suivant.
+>
+> **ANCIENNE NOTE** : lire le résultat du premier pipeline GitLab (déclenché par le push de `1aa1d38` le 17/11),
 > corriger les jobs en échec, puis consigner l'identifiant et le résultat dans `TESTING_AND_VALIDATION.md`.
 > Push fait (autorisé) : GitLab `origin` (projet 89054342, privé) et GitHub `github`, `main` = `1aa1d38` sur les deux.
 > Le résultat du pipeline n'est **pas encore vérifié** (projet privé, nécessite la connexion de l'utilisatrice). Aucune tâche non bloquée ne reste ouverte.
@@ -56,7 +59,8 @@ benchmark de latence, première version de `.gitlab-ci.yml` (détails dans l'his
 - [x] Tests *live* en écriture — faits le 17/11 (4/4)
 - [x] Commit initial — `1aa1d38` le 17/11 (autorisé)
 - [x] Remotes GitLab (`origin`) et GitHub (`github`) + push de `main` — faits le 17/11
-- [ ] Premier pipeline GitLab : résultat à lire et consigner
+- [x] Premier pipeline GitLab : #3078686978 (1 échec corrigé), #3078904924 (10/10 jobs automatiques réussis)
+- [ ] Pipeline suivant avec statut global « réussi » (après correctif `ml:promote-model` / `report:summary`)
 - [ ] Promotion du modèle candidat tracé (facultatif)
 - [ ] Suppression des images `cticlean-*` (facultatif)
 

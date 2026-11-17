@@ -10,6 +10,11 @@ Suivi d'avancement associé : [`docs/FINALIZATION_PROGRESS.md`](FINALIZATION_PRO
 
 ---
 
+## 00. DERNIER ÉTAT (17/11/2026, après push)
+
+Historique Git : `05b64df` (initial, sans ligne Co-Authored-By) → `ff9a580` (correctif CI) → `4d10748` (suivi), identique sur GitLab (`origin`, privé, ID 89054342) et GitHub (`github`). Ne jamais ajouter de ligne Co-Authored-By.
+CI : pipeline GitLab **#3078904924** (commit `4d10748`, 17/11/2026, 6 min 51 s) : les 10 jobs automatiques réussis — validate, lint, secrets (gitleaks), dépendances (pip-audit : « No known vulnerabilities found »), tests Python (85 réussis, couverture 76 %), Hardhat (21 passing), `ml:data-validation` (corpus régénéré identique, PROMOTABLE), `ml:train-candidate` (empreinte enregistrée = empreinte courante, PROMOTABLE), build des 3 images. Correctif suivant (statut « manuel ») dans `.gitlab-ci.yml`, non encore commité/poussé au moment de cette note. Push forcé sur `main` GitLab : désactivé (protection normale).
+
 ## 0. MISE À JOUR — fin de la session « mission finale » (17/11/2026) — À LIRE EN PREMIER
 
 Cette section **remplace** les §4 (phases), §9 (problèmes) et §11 (prochaines étapes) ci-dessous, conservés comme historique.

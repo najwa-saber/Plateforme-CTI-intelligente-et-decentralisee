@@ -1,8 +1,7 @@
 # Pipeline GitLab CI/CD
 
-Fichier : [`.gitlab-ci.yml`](../.gitlab-ci.yml). **État : validé localement uniquement.** Aucun pipeline n'a encore
-tourné sur GitLab, car aucun dépôt GitLab n'est relié au projet (pas de remote, aucun commit). Ce document décrit
-ce que la pipeline fait et comment la lancer pour la première fois.
+Fichier : [`.gitlab-ci.yml`](../.gitlab-ci.yml). **État : exécuté sur GitLab.com** (projet privé `projet-ia8944347/plateforme-cti-intelligente-et-decentralisee`).
+Le pipeline GitLab **#3078904924** (commit `4d10748`, 17/11/2026, 6 min 51 s) : les 10 jobs automatiques réussis — validate, lint, secrets (gitleaks), dépendances (pip-audit : « No known vulnerabilities found »), tests Python (85 réussis, couverture 76 %), Hardhat (21 passing), `ml:data-validation` (corpus régénéré identique, PROMOTABLE), `ml:train-candidate` (empreinte enregistrée = empreinte courante, PROMOTABLE), build des 3 images. Détails et historique des corrections : §6.
 
 ## 1. Étapes et jobs
 
@@ -51,7 +50,7 @@ Chaque candidat porte dans `metrics.json` l'empreinte SHA-256 des splits et la v
 | Installation des deux locks dans un même environnement (template `.python`) | OK, `pip check` sans conflit |
 | CI Lint de GitLab | **non exécuté** (nécessite un projet GitLab) |
 
-## 5. Première exécution sur GitLab (après autorisation du commit et du push)
+## 5. Mise en place (réalisée le 17/11/2026) (après autorisation du commit et du push)
 
 1. Créer un projet GitLab vide (sans README) ; activer le registre de conteneurs si l'on veut pousser les images.
 2. Vérifier qu'un runner **Docker** est disponible ; `build:images` et `integration:stack` exigent le mode *privileged* (dind).
@@ -70,3 +69,13 @@ Chaque candidat porte dans `metrics.json` l'empreinte SHA-256 des splits et la v
 
 VS Code : l'extension officielle « GitLab Workflow » permet de suivre les pipelines après le push (authentification
 par jeton personnel, à créer par l'utilisatrice ; ne jamais le placer dans le dépôt). Non vérifié depuis cette session.
+
+## 6. Exécutions réelles
+
+| Pipeline | Commit | Résultat | Correction |
+|---|---|---|---|
+| #3078686978 | `1aa1d38` | 1 job en échec : `ml:data-validation` — `git: command not found` (exit 127) | `ff9a580` : copie du corpus + `diff -r` ; CSV en LF |
+| #3078904924 | `4d10748` | 10/10 jobs automatiques réussis ; statut « manuel » car `ml:promote-model` (manuel) bloquait `report:summary` | promotion manuelle non bloquante (`allow_failure: true`), `report:summary` avec `needs` sur les jobs automatiques, dépendance optionnelle vers `ml:train-candidate` |
+| suivant | — | à consigner | — |
+
+Remarque : la branche `main` est protégée ; le push forcé (nécessaire une fois pour réécrire le message du commit initial) a été autorisé puis immédiatement désactivé.

@@ -24,6 +24,12 @@ de preuve sont indiqués. Ce qui n'a pas été exécuté est marqué comme tel.
 | Lint | ruff 0.8.4 (backend, frontend, scripts) | 15 avertissements corrigés → « All checks passed! » ; sorties des scripts de données identiques octet par octet | — |
 | Installation combinée des deux locks (cas CI) | `pip install -r … -c backend/requirements.lock -r … -c frontend/requirements.lock` en conteneur neuf | OK, `pip check` sans conflit ; 85 tests ; porte ML PROMOTABLE (macro-F1 0,874) | — |
 
+## 1 bis. Exécution réelle sur GitLab CI
+
+* Pipeline #3078686978 (commit initial `1aa1d38`) : 11 jobs réussis, **1 échec** — `ml:data-validation` (`git: command not found`, exit 127 : l'image `python:3.11-slim` ne contient pas git). Corrigé dans `ff9a580` (copie + `diff -r`, CSV écrits en LF).
+* Pipeline GitLab **#3078904924** (commit `4d10748`, 17/11/2026, 6 min 51 s) : les 10 jobs automatiques réussis — validate, lint, secrets (gitleaks), dépendances (pip-audit : « No known vulnerabilities found »), tests Python (85 réussis, couverture 76 %), Hardhat (21 passing), `ml:data-validation` (corpus régénéré identique, PROMOTABLE), `ml:train-candidate` (empreinte enregistrée = empreinte courante, PROMOTABLE), build des 3 images.
+* Le statut global restait « manuel » (bloqué) : `ml:promote-model` était un job manuel bloquant et `report:summary` attendait toutes les étapes. Corrigé ensuite (promotion manuelle non bloquante, rapport dépendant des seuls jobs automatiques) ; **résultat de ce dernier correctif à confirmer au prochain pipeline**.
+
 ## 2. Tests *live* (services réels) — 4/4 réussis le 17/11 (autorisés)
 
 `backend/tests/test_live_integration.py` (4 tests, marqueurs `live_chain` / `live_misp`) :
