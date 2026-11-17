@@ -24,7 +24,7 @@ soumise à autorisation (commit, push et exécution réelle de la pipeline GitLa
 
 | # | Phase | État | Réalisé (preuve) | Restant |
 |---|---|---|---|---|
-| 1 | Git / sécurisation | prêt, commit en attente | `.gitignore` corrigé, `.gitattributes`, gitleaks 0 fuite sur 259 fichiers, `.env` ignoré | commit initial ⏸ |
+| 1 | Git / sécurisation | prêt, commit en attente | `.gitignore` corrigé, `.gitattributes`, gitleaks 0 fuite sur 259 fichiers, `.env` ignoré | remote et push ⏸ (commit `1aa1d38` fait) |
 | 2 | Docker / architecture | terminé | digests, locks alignés, installation propre OK, conteneurs reconstruits sans toucher aux données | démarrage complet d'une pile neuve (optionnel) |
 | 3 | ML / NLP | terminé | 7 modèles, CV imbriquée, test, jeu externe, porte de validation, décision documentée | promotion du candidat tracé ⏸ (facultatif : métriques identiques) |
 | 4 | Fonctions CTI | terminé | scénario 24/24 après mise à jour, cohérence 12/12, ancrages OK, benchmark par étape | — |
@@ -56,7 +56,7 @@ Faits le 17/11 après autorisation : rejeu du scénario (24/24) et tests *live* 
    par rapport et des transactions sur la chaîne en service. But : valider les chemins d'écriture avec FastAPI 0.163 / Starlette 1.10.
 2. ~~**3 tests *live* en écriture**~~ (faits) (`pytest -m "live_chain or live_misp"`) — déploient 2 contrats neufs sur le nœud (sans
    toucher au contrat de la plateforme) et créent puis suppriment un événement MISP.
-3. **Commit initial** (message proposé ci-dessous) — aucun effet externe.
+3. ~~**Commit initial**~~ — fait : `1aa1d38` (263 fichiers). (message proposé ci-dessous) — aucun effet externe.
 4. **Création du projet GitLab, `git remote add`, `git push`** — publication externe ; déclenche le premier pipeline.
 5. Promotion du modèle candidat (métriques identiques, apporte seulement l'empreinte du jeu de données) — facultatif.
 6. Suppression des images de test `cticlean-*` — nettoyage facultatif.

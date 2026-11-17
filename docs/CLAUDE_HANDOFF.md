@@ -35,7 +35,8 @@ CTI-A25476F0FE, MISP événement 17, on-chain id 4 VALIDATED) ; tests *live* 4/4
 **Prochaines étapes (toutes soumises à autorisation)** :
 1. ~~scénario de démonstration~~ : fait (24/24) ;
 2. ~~tests live~~ : faits (4/4) ;
-3. commit initial (message dans `FINAL_PROJECT_REPORT.md` §4) ;
+3. ~~commit initial~~ : fait, `1aa1d38` sur `main` (263 fichiers ; les mises à jour de suivi postérieures ne sont pas encore commitées) ;
+3 bis. (ancien libellé) commit initial (message dans `FINAL_PROJECT_REPORT.md` §4) ;
 4. projet GitLab + `git remote add` + `git push` → premier pipeline ; consigner son identifiant et son résultat ;
 5. facultatif : promotion du modèle candidat, suppression des images `cticlean-*`.
 

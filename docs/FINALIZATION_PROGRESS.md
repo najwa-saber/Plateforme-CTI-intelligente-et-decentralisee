@@ -4,14 +4,16 @@ Dernière mise à jour : **17/11/2026, fin de la session « mission finale »**.
 Bilan détaillé : [`FINAL_PROJECT_REPORT.md`](FINAL_PROJECT_REPORT.md) · reprise : [`CLAUDE_HANDOFF.md`](CLAUDE_HANDOFF.md) ·
 feuille de route d'origine conservée : [`FINALIZATION_ROADMAP.md`](FINALIZATION_ROADMAP.md).
 
-> **PROCHAINE TÂCHE** (bloquée par autorisation) : commit initial, puis création du projet GitLab, push et premier
-> pipeline réel (consigner son identifiant et son résultat). Aucune tâche non bloquée ne reste ouverte.
+> **PROCHAINE TÂCHE** : lire le résultat du premier pipeline GitLab (déclenché par le push de `1aa1d38` le 17/11),
+> corriger les jobs en échec, puis consigner l'identifiant et le résultat dans `TESTING_AND_VALIDATION.md`.
+> Push fait (autorisé) : GitLab `origin` (projet 89054342, privé) et GitHub `github`, `main` = `1aa1d38` sur les deux.
+> Le résultat du pipeline n'est **pas encore vérifié** (projet privé, nécessite la connexion de l'utilisatrice). Aucune tâche non bloquée ne reste ouverte.
 
 ## Avancement par phase
 
 | # | Phase | État | Estimation* |
 |---|---|---|---|
-| 1 | Git / dépôt propre | prêt ; commit **en attente d'autorisation** | 95 % |
+| 1 | Git / dépôt propre | commit initial `1aa1d38` (263 fichiers, gitleaks 0 fuite) ; aucun remote | 100 % |
 | 2 | Docker / reproductibilité | installation propre OK ; conteneurs reconstruits avec dépendances corrigées | 95 % |
 | 3 | ML / NLP | terminé ; promotion facultative en attente | 100 % |
 | 4 | Fonctions CTI | terminé : scénario 24/24 rejoué après mise à jour | 100 % |
@@ -42,6 +44,8 @@ feuille de route d'origine conservée : [`FINALIZATION_ROADMAP.md`](FINALIZATION
     (66/74 = 89,2 %, NF06 et K9-E3 passés à « vérifié »).
 11. Avec autorisation : scénario rejoué (24/24, 8,1 s, MISP événement 17, rapport on-chain 4 VALIDATED) ; tests *live*
     4/4 (11,96 s) ; ensuite cohérence 12/12 et audit des ancrages OK ; contrat de la plateforme inchangé.
+12. Avec autorisation : commit initial `1aa1d38` sur `main` (263 fichiers) après re-scan des fichiers indexés
+    (gitleaks : aucune fuite ; aucune des 9 valeurs secrètes du `.env` présente). Aucun remote, aucun push.
 
 ### Session précédente
 Audits Git et migrations, comparaison de 7 modèles, jeu externe ATT&CK, porte de validation, test de migration,
@@ -50,8 +54,9 @@ benchmark de latence, première version de `.gitlab-ci.yml` (détails dans l'his
 ## En attente d'autorisation (ne pas exécuter sans accord)
 - [x] Rejeu du scénario de démonstration — fait le 17/11 (24/24)
 - [x] Tests *live* en écriture — faits le 17/11 (4/4)
-- [ ] Commit initial
-- [ ] Création du projet GitLab, remote, push, premier pipeline
+- [x] Commit initial — `1aa1d38` le 17/11 (autorisé)
+- [x] Remotes GitLab (`origin`) et GitHub (`github`) + push de `main` — faits le 17/11
+- [ ] Premier pipeline GitLab : résultat à lire et consigner
 - [ ] Promotion du modèle candidat tracé (facultatif)
 - [ ] Suppression des images `cticlean-*` (facultatif)
 
