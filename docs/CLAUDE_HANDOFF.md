@@ -10,6 +10,10 @@ Suivi d'avancement associé : [`docs/FINALIZATION_PROGRESS.md`](FINALIZATION_PRO
 
 ---
 
+## 000. ÉTAT FINAL CI (17/11/2026)
+
+Pipeline #3079286060 (`5e7b224`) : statut « success », 10/10 jobs automatiques, et le job manuel `integration:stack` **réussi** (140 s) : pile neuve construite sur le runner (PostgreSQL, Hardhat, backend), santé « ok » sur les 5 composants (MISP en mode simulé), scénario de démonstration **24/24 étapes** réussi. `main` = `5e7b224` sur GitLab et GitHub.
+
 ## 00. DERNIER ÉTAT (17/11/2026, après push)
 
 Historique Git : `05b64df` (initial, sans ligne Co-Authored-By) → `ff9a580` (correctif CI) → `4d10748` (suivi), identique sur GitLab (`origin`, privé, ID 89054342) et GitHub (`github`). Ne jamais ajouter de ligne Co-Authored-By.

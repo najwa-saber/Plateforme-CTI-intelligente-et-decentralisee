@@ -9,12 +9,12 @@ soumise à autorisation (commit, push et exécution réelle de la pipeline GitLa
 |---|---|---|
 | Fonctionnalités principales opérationnelles | ✅ | scénario 24/24 rejoué après la mise à jour (17/11 10:53) ; cohérence 12/12 ; audit des ancrages OK |
 | Architecture stabilisée | ✅ | `ARCHITECTURE.md` ; 9 services sains ; migration tête `0003` inchangée |
-| Docker reproductible | ✅ (partiel : pile neuve complète non démarrée) | `test-reports/clean_install.json` |
+| Docker reproductible | ✅ (pile neuve démarrée et scénario 24/24 sur le runner GitLab ; MISP réel non inclus en CI) | `test-reports/clean_install.json` |
 | Module ML correctement évalué | ✅ | `ML_EVALUATION.md`, `test-reports/ml_model_comparison.json` |
 | Tests autorisés exécutés | ✅ | backend 85, interface 19, contrat 21, *live* 4/4 |
 | Interface validée | ✅ | 19 tests ; audit 375 / 768 / 820 / 1 366 px ; 3 défauts corrigés |
 | Intégrations vérifiées | ✅ | MISP réel (événement 17), chaîne (rapport on-chain 4, VALIDATED 2/2), tests *live* 4/4 après la mise à jour |
-| Pipeline GitLab réellement exécutée | ✅ | #3078956475 (`0c389b6`) : statut « success », 10/10 jobs automatiques ; job manuel `integration:stack` corrigé, à confirmer |
+| Pipeline GitLab réellement exécutée | ✅ | Pipeline #3079286060 (`5e7b224`) : statut « success », 10/10 jobs automatiques, et le job manuel `integration:stack` **réussi** (140 s) : pile neuve construite sur le runner (PostgreSQL, Hardhat, backend), santé « ok » sur les 5 composants (MISP en mode simulé), scénario de démonstration **24/24 étapes** réussi |
 | Documentation complète | ✅ | index dans `PROJECT_COMPLETE_DOCUMENTATION.md` §10 |
 | Exigences CDC / cadrage vérifiées | 66/74 (89,2 %), pondéré 93,9 % | `REQUIREMENTS_TRACEABILITY.md` |
 | Limitations documentées | ✅ | `10_limites.md`, `PROJECT_COMPLETE_DOCUMENTATION.md` §6, `SECURITY_AUDIT.md` §4 |

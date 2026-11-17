@@ -4,7 +4,9 @@ Dernière mise à jour : **17/11/2026, fin de la session « mission finale »**.
 Bilan détaillé : [`FINAL_PROJECT_REPORT.md`](FINAL_PROJECT_REPORT.md) · reprise : [`CLAUDE_HANDOFF.md`](CLAUDE_HANDOFF.md) ·
 feuille de route d'origine conservée : [`FINALIZATION_ROADMAP.md`](FINALIZATION_ROADMAP.md).
 
-> **ÉTAT CI** : pipeline #3078904924 (`4d10748`) — 10/10 jobs automatiques réussis ; statut global « manuel » corrigé
+> **ÉTAT CI (dernier)** : pipeline #3079286060 (`5e7b224`) : statut « success », 10/10 jobs automatiques, et le job manuel `integration:stack` **réussi** (140 s) : pile neuve construite sur le runner (PostgreSQL, Hardhat, backend), santé « ok » sur les 5 composants (MISP en mode simulé), scénario de démonstration **24/24 étapes** réussi.
+>
+> **ÉTAT CI (précédent)** : pipeline #3078904924 (`4d10748`) — 10/10 jobs automatiques réussis ; statut global « manuel » corrigé
 > dans `.gitlab-ci.yml` (commit et push à autoriser), à confirmer au pipeline suivant.
 >
 > **ANCIENNE NOTE** : lire le résultat du premier pipeline GitLab (déclenché par le push de `1aa1d38` le 17/11),
@@ -60,7 +62,7 @@ benchmark de latence, première version de `.gitlab-ci.yml` (détails dans l'his
 - [x] Commit initial — `1aa1d38` le 17/11 (autorisé)
 - [x] Remotes GitLab (`origin`) et GitHub (`github`) + push de `main` — faits le 17/11
 - [x] Premier pipeline GitLab : #3078686978 (1 échec corrigé), #3078904924 (10/10 jobs automatiques réussis)
-- [ ] Pipeline suivant avec statut global « réussi » (après correctif `ml:promote-model` / `report:summary`)
+- [x] Pipeline au statut « success » : #3078956475 puis #3079286060 (avec `integration:stack` réussi)
 - [ ] Promotion du modèle candidat tracé (facultatif)
 - [ ] Suppression des images `cticlean-*` (facultatif)
 

@@ -77,6 +77,6 @@ par jeton personnel, à créer par l'utilisatrice ; ne jamais le placer dans le 
 | #3078686978 | `1aa1d38` | 1 job en échec : `ml:data-validation` — `git: command not found` (exit 127) | `ff9a580` : copie du corpus + `diff -r` ; CSV en LF |
 | #3078904924 | `4d10748` | 10/10 jobs automatiques réussis ; statut « manuel » car `ml:promote-model` (manuel) bloquait `report:summary` | promotion manuelle non bloquante (`allow_failure: true`), `report:summary` avec `needs` sur les jobs automatiques, dépendance optionnelle vers `ml:train-candidate` |
 | #3078956475 | `0c389b6` | **statut global « success »** : 10/10 jobs automatiques réussis, rapport exécuté ; `integration:stack` (manuel, optionnel, lancé à la main) en échec : API injoignable en `docker:8000` car le port était publié sur `127.0.0.1` dans le service dind (le backend était sain dans ses journaux) | adresse de publication de l'API paramétrable (`API_BIND_ADDRESS`, défaut `127.0.0.1`, `0.0.0.0` dans ce job) + arrêt explicite si l'API ne répond pas |
-| suivant | — | à consigner (en particulier `integration:stack`) | — |
+| #3079286060 | `5e7b224` | **success** ; `integration:stack` réussi : pile neuve sur le runner, scénario 24/24 (MISP simulé) | — |
 
 Remarque : la branche `main` est protégée ; le push forcé (nécessaire une fois pour réécrire le message du commit initial) a été autorisé puis immédiatement désactivé.
