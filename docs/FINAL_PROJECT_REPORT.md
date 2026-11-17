@@ -14,7 +14,7 @@ soumise à autorisation (commit, push et exécution réelle de la pipeline GitLa
 | Tests autorisés exécutés | ✅ | backend 85, interface 19, contrat 21, *live* 4/4 |
 | Interface validée | ✅ | 19 tests ; audit 375 / 768 / 820 / 1 366 px ; 3 défauts corrigés |
 | Intégrations vérifiées | ✅ | MISP réel (événement 17), chaîne (rapport on-chain 4, VALIDATED 2/2), tests *live* 4/4 après la mise à jour |
-| Pipeline GitLab réellement exécutée | ✅ (statut global à confirmer) | #3078904924 : 10/10 jobs automatiques réussis ; correctif du statut « manuel » à valider au prochain pipeline |
+| Pipeline GitLab réellement exécutée | ✅ | #3078956475 (`0c389b6`) : statut « success », 10/10 jobs automatiques ; job manuel `integration:stack` corrigé, à confirmer |
 | Documentation complète | ✅ | index dans `PROJECT_COMPLETE_DOCUMENTATION.md` §10 |
 | Exigences CDC / cadrage vérifiées | 66/74 (89,2 %), pondéré 93,9 % | `REQUIREMENTS_TRACEABILITY.md` |
 | Limitations documentées | ✅ | `10_limites.md`, `PROJECT_COMPLETE_DOCUMENTATION.md` §6, `SECURITY_AUDIT.md` §4 |
