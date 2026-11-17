@@ -1,0 +1,3 @@
+Firewall command injection exploited by state-linked actor
+
+The firewall command injection (CVE-2099-0815) is now exploited by a state-linked actor dubbed Basalt Crane. After exploitation, the actor installs a passive implant that listens for specially crafted packets. The exploitation infrastructure includes 192.0.2.99 and fw-telemetry-update.example.

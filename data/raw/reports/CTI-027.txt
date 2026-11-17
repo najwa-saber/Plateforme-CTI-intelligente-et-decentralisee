@@ -1,0 +1,3 @@
+Ransomware deployed after VPN appliance exploitation
+
+Operators of the Shardlock ransomware gained access by exploiting an unpatched VPN appliance, then moved laterally with remote desktop and encrypted 400 workstations over a weekend. The exploitation is only the entry point; the report focuses on the encryption and extortion phase. The locker (SHA-256 da81b791df68a686338fc4faf0d2ed3f65a6ff9e3eaad631cde7e9975930f8cf) communicates with 192.0.2.177 to register the victim and retrieve the public key. A ransom of 40 bitcoin was requested.

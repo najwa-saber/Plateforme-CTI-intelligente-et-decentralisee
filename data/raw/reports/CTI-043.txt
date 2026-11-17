@@ -1,0 +1,3 @@
+Loader distributing multiple payloads via fake updates
+
+Compromised websites display a fake browser update banner. The downloaded script launches an obfuscated PowerShell loader that fetches the next stage from hxxps://browser-update-cdn[.]test/u/stage2.dat. Depending on the victim profile, the loader installs a banking trojan or a remote access tool. The PowerShell script hash is ebf7321eba38c34007dae5fa278c340e77ec648fb7a6a61ec489deff9531ece3. The loader checks for sandbox artefacts before running.

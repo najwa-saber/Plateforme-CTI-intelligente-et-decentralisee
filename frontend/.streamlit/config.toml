@@ -1,0 +1,33 @@
+# Initial theme = dark tokens of components/theme.py (avoids a light flash before the first run).
+# The active theme is then switched at runtime by the sidebar selector (components/theme.py).
+[theme]
+base = "dark"
+primaryColor = "#d4b47a"
+backgroundColor = "#0b0b0d"
+secondaryBackgroundColor = "#1f2024"
+textColor = "#f2efe8"
+borderColor = "#2e3036"
+linkColor = "#e2c58c"
+codeBackgroundColor = "#1f2024"
+baseRadius = "0.6rem"
+font = "sans serif"
+
+[theme.sidebar]
+backgroundColor = "#111214"
+secondaryBackgroundColor = "#17181b"
+textColor = "#f2efe8"
+borderColor = "#2e3036"
+primaryColor = "#d4b47a"
+linkColor = "#e2c58c"
+
+[client]
+# "minimal" hides Streamlit's own Settings/theme menu, which would conflict with the sidebar selector
+toolbarMode = "minimal"
+
+[server]
+headless = true
+maxUploadSize = 5
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false

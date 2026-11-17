@@ -1,0 +1,3 @@
+Exchange-like mail server exploitation chain
+
+An exploitation chain targeting on-premises mail servers combines a server-side request forgery (CVE-2099-1101) and a post-authentication code execution (CVE-2099-1102). Attackers drop web shells in the web root and use them to export mailboxes. The web shell MD5 is 697791d8808a4f1831593f34e6737951. Exploitation sources included 198.51.100.33.

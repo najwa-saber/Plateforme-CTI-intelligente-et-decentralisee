@@ -1,0 +1,3 @@
+Firewall management interface command injection
+
+A command injection in the web management interface of a firewall series (CVE-2099-0815) allows remote attackers to execute operating system commands as root. Exploitation attempts were observed from 192.0.2.99 targeting management interfaces exposed to the internet. The vendor recommends restricting the management interface to trusted networks and upgrading the firmware.

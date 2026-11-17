@@ -1,0 +1,3 @@
+Glacier ransomware targeting virtualisation hosts
+
+Glacier, a Linux variant of a ransomware family, targets hypervisors. Attackers log in through exposed remote access services with stolen credentials, shut down virtual machines and encrypt the disk images. The encryptor (SHA-256 ba7b589ca11313cedb46bde7a25a8dab62d626307867b7cdc7d8b79423c04c36) is downloaded from hxxp://203.0.113[.]99/g.sh. Entire clusters become unavailable in minutes, which multiplies the impact compared with workstation encryption. Victims should restrict management interfaces to dedicated networks.

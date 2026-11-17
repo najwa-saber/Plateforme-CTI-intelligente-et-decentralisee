@@ -1,0 +1,3 @@
+Calendar invitation phishing with malicious ICS
+
+Attackers abused calendar invitations: the ICS file included a meeting link to https://meeting-join-now.example/j/4471 that requested credentials before joining. The invitation was automatically added to calendars even when the email was quarantined. Some variants also offered a 'meeting plugin' with SHA-256 fe2b8cb806d06f0a38ff9f806a01ffd378844a6fe6b0aca594db7dbb8d858264, but the main objective of the campaign remained credential phishing. The domain was hosted behind 192.0.2.120.

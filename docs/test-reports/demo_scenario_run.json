@@ -1,0 +1,224 @@
+{
+  "executed_at": "2026-11-17T10:53:49.056075+00:00",
+  "api": "http://127.0.0.1:8000",
+  "elapsed_s": 8.07,
+  "health": {
+    "status": "ok",
+    "version": "1.0.0",
+    "components": {
+      "database": {
+        "ok": true,
+        "engine": "postgresql"
+      },
+      "ml": {
+        "ok": true,
+        "version": "lr-tfidf-20261116184426",
+        "error": null
+      },
+      "mitre": {
+        "ok": true,
+        "attack_version": "20.1",
+        "techniques": 706,
+        "rules": 55
+      },
+      "misp": {
+        "ok": true,
+        "mode": "real",
+        "reachable": true,
+        "url": "https://misp-nginx:8443",
+        "version": "2.5.51"
+      },
+      "ethereum": {
+        "ok": true,
+        "rpc_url": "http://hardhat:8545",
+        "connected": true,
+        "chain_id": 31337,
+        "block_number": 76,
+        "contract_address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        "contract_deployed": true,
+        "deployment_block": 1,
+        "voting_period_s": 604800,
+        "report_count": 3,
+        "chain_instance": "0x61323662b46e8ff9a574c17b47098c3f53755b9b1c31da0ac95969cc3ce8f69b",
+        "reports_anchored": 5,
+        "reports_on_previous_instance": 2,
+        "warning": "2 report(s) were anchored on a previous instance of the local Hardhat network (in-memory chain restarted): their on-chain verification is no longer possible. See docs/07_troubleshooting.md (chain reset)."
+      }
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Organisation A imports a phishing CTI report (TXT)",
+      "ok": true,
+      "detail": "HTTP 201 report_id=CTI-A25476F0FE",
+      "data": null
+    },
+    {
+      "step": 2,
+      "title": "IOCs extracted automatically",
+      "ok": true,
+      "detail": "url:https://secure-hr-portal.example/sso/login, md5:9e107d9d372bb6826bd81d3542a419d6, ipv4:203.0.113.66, domain:secure-hr-portal.example",
+      "data": null
+    },
+    {
+      "step": 3,
+      "title": "Indicators normalised (refanged, lower-cased)",
+      "ok": true,
+      "detail": "defanged in source: ['https://secure-hr-portal.example/sso/login']",
+      "data": null
+    },
+    {
+      "step": 4,
+      "title": "Duplicate detection",
+      "ok": true,
+      "detail": "within report: 1 | known elsewhere: 4 | known in MISP: ['https://secure-hr-portal.example/sso/login', '9e107d9d372bb6826bd81d3542a419d6', '203.0.113.66', 'secure-hr-portal.example']",
+      "data": null
+    },
+    {
+      "step": 5,
+      "title": "ML classification",
+      "ok": true,
+      "detail": "phishing p={'phishing': 0.9778, 'ransomware': 0.0051, 'malware': 0.0121, 'exploitation': 0.0049} (logistic_regression)",
+      "data": null
+    },
+    {
+      "step": 6,
+      "title": "MITRE ATT&CK techniques proposed",
+      "ok": true,
+      "detail": "T1566.002 Spearphishing Link (rule 0.95); T1566.001 Spearphishing Attachment (rule 0.7); T1078 Valid Accounts (rule 0.5); T1204.001 Malicious Link (rule 0.45); T1056.003 Web Portal Capture (similarity 0.33)",
+      "data": null
+    },
+    {
+      "step": 7,
+      "title": "Event created in MISP",
+      "ok": true,
+      "detail": "mode=real event_id=17 error=None",
+      "data": null
+    },
+    {
+      "step": 8,
+      "title": "Backend computes the SHA-256 of the canonical report",
+      "ok": true,
+      "detail": "sha256=6c424298f01098b316888a7d1dcccb5fafda282efac3b5d12acfa845fef16746",
+      "data": null
+    },
+    {
+      "step": 9,
+      "title": "A submits the fingerprint on Ethereum",
+      "ok": true,
+      "detail": "chain_report_id=4 tx=0x72b28f01fd2015c8b8d02cdd5855bde7c86ce41138c12d9d5bb7d0c541742697 block=77",
+      "data": null
+    },
+    {
+      "step": 10,
+      "title": "B consults the report",
+      "ok": true,
+      "detail": "",
+      "data": null
+    },
+    {
+      "step": 11,
+      "title": "B votes for validation",
+      "ok": true,
+      "detail": "tx=0xa96ca146893943b4f63dc1807409e3a044e28430a03dded00e878531c5fe07a4 preview={'can_finalize': False, 'outcome': 'PENDING'}",
+      "data": null
+    },
+    {
+      "step": 11,
+      "title": "(robustness) premature finalisation refused by the contract",
+      "ok": true,
+      "detail": "HTTP 409 FinalizationTooEarly",
+      "data": null
+    },
+    {
+      "step": 11,
+      "title": "(robustness) double vote refused",
+      "ok": true,
+      "detail": "HTTP 409",
+      "data": null
+    },
+    {
+      "step": 11,
+      "title": "(robustness) self-validation refused",
+      "ok": true,
+      "detail": "HTTP 403",
+      "data": null
+    },
+    {
+      "step": 12,
+      "title": "C consults the report",
+      "ok": true,
+      "detail": "",
+      "data": null
+    },
+    {
+      "step": 13,
+      "title": "C votes for validation",
+      "ok": true,
+      "detail": "tx=0x38022bf062bd98eec8691125d72e5aa01ac4d3ecb537a10ce693ebc82a6e8fb0",
+      "data": null
+    },
+    {
+      "step": 14,
+      "title": "Smart contract finalises the report (majority rule)",
+      "ok": true,
+      "detail": "finalize tx=0xed342d6ce6f387ab9843533491e3aab7892ab9b4a661d7e1788d4ac56401b4bd",
+      "data": null
+    },
+    {
+      "step": 15,
+      "title": "Status becomes VALIDATED (on-chain and off-chain)",
+      "ok": true,
+      "detail": "off-chain=VALIDATED on-chain=VALIDATED votes=2/2",
+      "data": null
+    },
+    {
+      "step": 15,
+      "title": "(integrity) recomputed SHA-256 matches the on-chain fingerprint",
+      "ok": true,
+      "detail": "Integrity verified: the off-chain report matches the on-chain fingerprint",
+      "data": null
+    },
+    {
+      "step": 16,
+      "title": "Reliability score computed (S = 0.30R + 0.30Q + 0.40V)",
+      "ok": true,
+      "detail": "S=77.16 R=60.0 Q=63.87 V=100.0 level=elevee",
+      "data": null
+    },
+    {
+      "step": 17,
+      "title": "Reputation of A evolves with an explanation",
+      "ok": true,
+      "detail": "off-chain=60.0 on-chain=59.0 | Report CTI-A25476F0FE VALIDATED by peers (quality Q=64). Raw delta +2.83 x damping 0.75 (24h movement cap 10.0 (remaining budget 0.00)) -> +0.00 (60.00 -> 60.00).",
+      "data": null
+    },
+    {
+      "step": 18,
+      "title": "B imports a second report sharing an IOC (JSON with declared IOCs)",
+      "ok": true,
+      "detail": "report_id=CTI-5AE6CB024C known IOCs=['secure-hr-portal.example', 'https://secure-hr-portal.example/track', '203.0.113.67']",
+      "data": null
+    },
+    {
+      "step": 19,
+      "title": "Correlation engine identifies a potential relation",
+      "ok": true,
+      "detail": "score=0.5177 (moderate) reasons=['1 shared indicator(s): domain:secure-hr-portal.example', 'shared ATT&CK technique(s): T1566.002', 'published 3 day(s) apart', 'same category (phishing)']",
+      "data": null
+    },
+    {
+      "step": 20,
+      "title": "Dashboard statistics available",
+      "ok": true,
+      "detail": "reports=13 validated=5 iocs=45 correlations=45 tx=24",
+      "data": null
+    }
+  ],
+  "report_ids": [
+    "CTI-A25476F0FE",
+    "CTI-5AE6CB024C"
+  ],
+  "success": true
+}

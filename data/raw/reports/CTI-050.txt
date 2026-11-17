@@ -1,0 +1,3 @@
+IoT botnet Mirage used for denial-of-service
+
+The Mirage botnet infects routers and IP cameras through default credentials. Infected devices receive commands from 198.51.100.66 and launch traffic floods against gaming servers. The bot binary for ARM devices has MD5 a80c5006b274da42623dbded57ed5f2b. The botnet counts approximately 25,000 devices. Operators rent attack capacity on criminal forums.

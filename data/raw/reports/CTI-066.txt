@@ -1,0 +1,3 @@
+Mass scanning for vulnerable file transfer servers
+
+Following the disclosure of a path traversal flaw in a managed file transfer product (CVE-2099-0602), honeypots recorded large-scale scanning from 203.0.113.190, 203.0.113.191 and 198.51.100.55. Successful exploitation allows reading arbitrary files, including configuration files containing credentials. Exposed instances should be patched or placed behind a VPN.

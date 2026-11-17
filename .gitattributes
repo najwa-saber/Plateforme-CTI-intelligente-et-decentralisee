@@ -1,0 +1,16 @@
+# Line endings: scripts executed in Linux containers must stay LF even on Windows checkouts (core.autocrlf=true)
+*.sh        text eol=lf
+*.py        text eol=lf
+*.sol       text eol=lf
+*.js        text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.toml      text eol=lf
+*Dockerfile text eol=lf
+*.md        text
+*.json      text
+*.jsonl     text
+*.csv       text
+# Binary artefacts
+*.joblib    binary
+*.pdf       binary

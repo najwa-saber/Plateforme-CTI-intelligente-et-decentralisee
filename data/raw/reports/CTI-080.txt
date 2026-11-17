@@ -1,0 +1,3 @@
+Exploitation of an unauthenticated API in a monitoring tool
+
+An unauthenticated API endpoint in a network monitoring tool (CVE-2099-1402) lets attackers create administrator accounts. Vulnerability scanning for the endpoint started from 198.51.100.170. After exploitation, the attackers retrieved stored device credentials. The vendor fixed the issue and released detection guidance.

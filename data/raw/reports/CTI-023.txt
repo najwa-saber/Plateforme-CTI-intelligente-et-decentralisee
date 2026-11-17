@@ -1,0 +1,3 @@
+LockMare ransomware delivered after payroll phishing
+
+A transport company was hit by LockMare ransomware. Initial access came from the payroll phishing campaign, the employee's stolen credentials being reused on the VPN from 198.51.100.24. The operators used PowerShell to disable endpoint protection and deployed the locker (MD5 7ccb9f68bfa7dafa8368fcc001b21254) on every server. Files were renamed with the .lmare extension and the ransom note pointed to lockmare-pay.test. Encryption of the ERP database halted operations for four days.

@@ -1,0 +1,100 @@
+{
+  "contract": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "current_instance": "0x61323662b46e8ff9a574c17b47098c3f53755b9b1c31da0ac95969cc3ce8f69b",
+  "onchain_report_count": 4,
+  "reports": [
+    {
+      "report_id": "CTI-60C0B69D4E",
+      "chain_report_id": 1,
+      "pg_fingerprint": "78fddcdcdc9fdcd13d9e91c7d499504804771a64cadc8634d16dd168514de0d6",
+      "pg_instance": null,
+      "pg_status": "VALIDATED",
+      "pg_submitter": "A",
+      "onchain_record_at_this_id": {
+        "external_id": "CTI-7FCE46A77C",
+        "content_hash": "997272253989df81a99839115d5f4d5382724f0fadfdd81b2e8ec56fa6a32390",
+        "submitter": "C",
+        "status": "DISPUTED"
+      },
+      "verdict": "previous_instance (id now holds CTI-7FCE46A77C)"
+    },
+    {
+      "report_id": "CTI-9C938CFA11",
+      "chain_report_id": 2,
+      "pg_fingerprint": "f90c17f9dbf01c5d896773632ec1d4146ee39cd9de7ae6b5fa1cd0568cc69a44",
+      "pg_instance": null,
+      "pg_status": "VALIDATED",
+      "pg_submitter": "A",
+      "onchain_record_at_this_id": {
+        "external_id": "CTI-0860C34F98",
+        "content_hash": "a8032ee6c8fb2f7f1285da5bc9eb9509e80582e68185f8ddc1a3fcc0b0349c96",
+        "submitter": "A",
+        "status": "VALIDATED"
+      },
+      "verdict": "previous_instance (id now holds CTI-0860C34F98)"
+    },
+    {
+      "report_id": "CTI-7FCE46A77C",
+      "chain_report_id": 1,
+      "pg_fingerprint": "997272253989df81a99839115d5f4d5382724f0fadfdd81b2e8ec56fa6a32390",
+      "pg_instance": "0x61323662b46e8ff9a574c17b47098c3f53755b9b1c31da0ac95969cc3ce8f69b",
+      "pg_status": "DISPUTED",
+      "pg_submitter": "C",
+      "onchain_record_at_this_id": {
+        "external_id": "CTI-7FCE46A77C",
+        "content_hash": "997272253989df81a99839115d5f4d5382724f0fadfdd81b2e8ec56fa6a32390",
+        "submitter": "C",
+        "status": "DISPUTED"
+      },
+      "verdict": "current - fingerprint, externalId and submitter match"
+    },
+    {
+      "report_id": "CTI-0860C34F98",
+      "chain_report_id": 2,
+      "pg_fingerprint": "a8032ee6c8fb2f7f1285da5bc9eb9509e80582e68185f8ddc1a3fcc0b0349c96",
+      "pg_instance": "0x61323662b46e8ff9a574c17b47098c3f53755b9b1c31da0ac95969cc3ce8f69b",
+      "pg_status": "VALIDATED",
+      "pg_submitter": "A",
+      "onchain_record_at_this_id": {
+        "external_id": "CTI-0860C34F98",
+        "content_hash": "a8032ee6c8fb2f7f1285da5bc9eb9509e80582e68185f8ddc1a3fcc0b0349c96",
+        "submitter": "A",
+        "status": "VALIDATED"
+      },
+      "verdict": "current - fingerprint, externalId and submitter match"
+    },
+    {
+      "report_id": "CTI-BE426BF5C7",
+      "chain_report_id": 3,
+      "pg_fingerprint": "d86f6bc31230055b50d07eff0bf142207968d1ea0c5998a1b087eae06ca9cbf7",
+      "pg_instance": "0x61323662b46e8ff9a574c17b47098c3f53755b9b1c31da0ac95969cc3ce8f69b",
+      "pg_status": "VALIDATED",
+      "pg_submitter": "A",
+      "onchain_record_at_this_id": {
+        "external_id": "CTI-BE426BF5C7",
+        "content_hash": "d86f6bc31230055b50d07eff0bf142207968d1ea0c5998a1b087eae06ca9cbf7",
+        "submitter": "A",
+        "status": "VALIDATED"
+      },
+      "verdict": "current - fingerprint, externalId and submitter match"
+    },
+    {
+      "report_id": "CTI-A25476F0FE",
+      "chain_report_id": 4,
+      "pg_fingerprint": "6c424298f01098b316888a7d1dcccb5fafda282efac3b5d12acfa845fef16746",
+      "pg_instance": "0x61323662b46e8ff9a574c17b47098c3f53755b9b1c31da0ac95969cc3ce8f69b",
+      "pg_status": "VALIDATED",
+      "pg_submitter": "A",
+      "onchain_record_at_this_id": {
+        "external_id": "CTI-A25476F0FE",
+        "content_hash": "6c424298f01098b316888a7d1dcccb5fafda282efac3b5d12acfa845fef16746",
+        "submitter": "A",
+        "status": "VALIDATED"
+      },
+      "verdict": "current - fingerprint, externalId and submitter match"
+    }
+  ],
+  "duplicate_tx_hashes": [],
+  "current_chain_tx_linked_to_historical_reports": [],
+  "ok": true
+}

@@ -1,0 +1,3 @@
+Paper Owl ransomware hits a city council
+
+The Paper Owl group encrypted the servers of a city council, disrupting online services for citizens. The ransom note again pointed to https://paperowl-support.example/chat. The locker hash dd7edb88eac3391663f095bc5f8e6693a5ff2c50bd3e0891e666bd60c9443d6b matches earlier education-sector incidents. The council refused to pay and rebuilt its environment.

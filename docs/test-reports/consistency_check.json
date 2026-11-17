@@ -1,0 +1,80 @@
+{
+  "report_id": "CTI-A25476F0FE",
+  "chain_report_id": 4,
+  "misp_event_id": "17",
+  "checks": [
+    {
+      "check": "status API = PostgreSQL",
+      "platform": "VALIDATED",
+      "reference": "VALIDATED",
+      "ok": true
+    },
+    {
+      "check": "status PostgreSQL = contrat",
+      "platform": "VALIDATED",
+      "reference": "VALIDATED",
+      "ok": true
+    },
+    {
+      "check": "SHA-256 API = PostgreSQL",
+      "platform": "6c424298f01098b316888a7d1dcccb5fafda282efac3b5d12acfa845fef16746",
+      "reference": "6c424298f01098b316888a7d1dcccb5fafda282efac3b5d12acfa845fef16746",
+      "ok": true
+    },
+    {
+      "check": "SHA-256 PostgreSQL = contrat",
+      "platform": "6c424298f01098b316888a7d1dcccb5fafda282efac3b5d12acfa845fef16746",
+      "reference": "6c424298f01098b316888a7d1dcccb5fafda282efac3b5d12acfa845fef16746",
+      "ok": true
+    },
+    {
+      "check": "externalId contrat = rapport",
+      "platform": "CTI-A25476F0FE",
+      "reference": "CTI-A25476F0FE",
+      "ok": true
+    },
+    {
+      "check": "votes API = PostgreSQL",
+      "platform": "[('B', True), ('C', True)]",
+      "reference": "[('B', True), ('C', True)]",
+      "ok": true
+    },
+    {
+      "check": "approbations PostgreSQL = contrat",
+      "platform": "2",
+      "reference": "2",
+      "ok": true
+    },
+    {
+      "check": "score API = dernier snapshot PostgreSQL",
+      "platform": "77.16",
+      "reference": "77.16",
+      "ok": true
+    },
+    {
+      "check": "réputation A API = PostgreSQL",
+      "platform": "60.0",
+      "reference": "60.0",
+      "ok": true
+    },
+    {
+      "check": "réputation A on-chain (API) = contrat",
+      "platform": "59.0",
+      "reference": "59.0",
+      "ok": true
+    },
+    {
+      "check": "tag statut MISP = statut",
+      "platform": "['cti-platform:status=\"VALIDATED\"']",
+      "reference": "['cti-platform:status=\"VALIDATED\"']",
+      "ok": true
+    },
+    {
+      "check": "ancrage",
+      "platform": "current",
+      "reference": "current",
+      "ok": true
+    }
+  ],
+  "all_ok": true
+}

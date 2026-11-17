@@ -1,0 +1,3 @@
+Education sector ransomware wave
+
+Several universities reported encrypted file shares and wiped backups at the start of the summer holidays, when staffing is reduced. The ransom notes referred to a group calling itself Paper Owl and demanded payment to https://paperowl-support.example/chat. Files received the extension .owl. The encryptor hash is dd7edb88eac3391663f095bc5f8e6693a5ff2c50bd3e0891e666bd60c9443d6b. The attacks are attributed to the same affiliate based on identical tooling.

@@ -1,0 +1,3 @@
+Payroll portal phishing - infrastructure update
+
+Tracking of the payroll credential harvesting operation shows a migration of the collector to a new server while 198.51.100.24 remains in use as a redirector. The phishing page is now reachable at https://payroll-portal-secure.example/login. Analysts noticed the kit added a CAPTCHA to evade automated scanners. Indicators from the previous reports remain relevant and should stay on block lists.

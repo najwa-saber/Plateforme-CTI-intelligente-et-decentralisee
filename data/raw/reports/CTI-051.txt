@@ -1,0 +1,3 @@
+Fake update loader infrastructure
+
+The fake browser update loader rotated its infrastructure. The second stage is now hosted at browser-update-cdn.test and browser-patch-cdn.test, with the same payload delivery logic. Captured payloads include a remote access tool with SHA-256 1e3d8ce642cbd253a214eb31c1c5ac46d1d9f02aab158e23054575d5825146be. Website owners should check their content management systems for injected scripts.

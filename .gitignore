@@ -1,0 +1,32 @@
+# secrets
+.env
+*.env.local
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+*.db
+backend/cti_dev.db
+# node / hardhat
+blockchain/node_modules/
+blockchain/cache/
+blockchain/artifacts/
+blockchain/coverage/
+blockchain/deployments/
+# raw downloaded MITRE bundle (55 MB) - rebuilt with backend/scripts/build_mitre_dataset.py
+data/raw/mitre/enterprise-attack.json
+# misc
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+# logs / local tooling
+*.log
+.claude/
+# ML candidates produced by training runs / CI (only the promoted model is versioned)
+backend/app/ml/artifacts/candidates/
+# local test reports produced by CI-like runs
+/reports/

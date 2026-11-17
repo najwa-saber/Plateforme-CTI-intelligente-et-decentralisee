@@ -1,0 +1,3 @@
+Bank impersonation phishing targeting SMEs
+
+Small businesses received emails pretending to come from their bank and warning about a blocked transfer. The link led to hxxps://secure-bank-validation[.]test/unlock, which reproduced the online banking interface and asked for the activation code sent by SMS. Operators then called the victims to obtain additional codes. Hosting was traced to 198.51.100.211.

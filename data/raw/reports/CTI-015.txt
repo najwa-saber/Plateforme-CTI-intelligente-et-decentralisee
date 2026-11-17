@@ -1,0 +1,3 @@
+Tax refund phishing with PDF lure
+
+During the tax season, citizens received emails announcing a refund. The PDF attachment, MD5 5b1eb6f3231cabb696e9ee18564b11d6, contained a button to http://tax-refund-claim.test/form where victims entered their bank account and identity information. The sender display name copied the tax administration. The campaign targeted personal addresses rather than corporate inboxes and was relayed by a botnet of compromised servers.

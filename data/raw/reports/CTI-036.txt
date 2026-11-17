@@ -1,0 +1,3 @@
+Shardlock ransomware leak site analysis
+
+The Shardlock group published a leak site listing victims from retail and hospitality. The site mirrors are hosted at 192.0.2.177 and 192.0.2.178. Shardlock demands ransoms proportional to the victim revenue and offers a discount for fast payment. The encryptor da81b791df68a686338fc4faf0d2ed3f65a6ff9e3eaad631cde7e9975930f8cf has not changed.

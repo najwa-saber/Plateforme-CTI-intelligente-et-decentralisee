@@ -1,0 +1,3 @@
+Macro-based downloader in Excel documents
+
+Excel documents with malicious macros download a backdoor called Tinder Moth. When the user enables content, the macro drops a script that retrieves the payload from http://docs-preview-cdn.test/d/tm.bin. The payload MD5 is 7a498c8edbfb732aee3c2e8a43a4aa16 and it beacons to 192.0.2.210. The backdoor collects system information and waits for commands.

@@ -1,0 +1,18 @@
+{
+  "executed_at": "2026-11-17",
+  "procedure": [
+    "copy of the 248 Git-candidate files only (git ls-files --others --exclude-standard) into an empty folder: no .env, no node_modules, no .venv, no MITRE STIX bundle",
+    "python scripts/generate_env.py (fresh random keys)",
+    "docker compose -p cticlean build backend frontend hardhat (separate project name: existing cti-platform containers, volumes and database untouched)",
+    "docker run --rm --network none -e DATABASE_URL=sqlite:////tmp/t.db --entrypoint python cticlean-backend -m pytest -q -m 'not live_chain and not live_misp'"
+  ],
+  "results": {
+    "build_exit": 0, "build_seconds": 152,
+    "pip_install_backend_seconds": 115.1, "pip_install_frontend_seconds": 69.8,
+    "hardhat_npm_ci": "cached layer from the interrupted earlier attempt (same package-lock.json)",
+    "pytest_in_fresh_image": "85 passed, 4 deselected in 28.36s",
+    "versions_in_image": "scikit-learn 1.6.1, fastapi 0.115.14, web3 7.8.0",
+    "model_and_mitre_catalogue_present": "app/ml/artifacts/{classifier.joblib,metrics.json}, app/mitre/data/enterprise_techniques.json"
+  },
+  "not_covered": "Full stack start of the clean images (MISP, Postgres, Hardhat node) was not performed, to avoid a second MISP/Postgres instance; the running stack is covered by the live checks."
+}

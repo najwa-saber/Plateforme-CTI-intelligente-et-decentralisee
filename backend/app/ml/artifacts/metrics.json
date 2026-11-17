@@ -1,0 +1,534 @@
+{
+  "model_version": "lr-tfidf-20261116184426",
+  "dataset": {
+    "source": "synthetic (data/annotated/reports.jsonl) - see data/README.md",
+    "sizes": {
+      "train": 48,
+      "validation": 16,
+      "test": 16
+    },
+    "split_strategy": "60/20/20 grouped by campaign_id, stratified by category"
+  },
+  "model_selection": [
+    {
+      "C": 0.1,
+      "val_macro_f1": 1.0,
+      "val_accuracy": 1.0,
+      "val_log_loss": 1.3559
+    },
+    {
+      "C": 1.0,
+      "val_macro_f1": 1.0,
+      "val_accuracy": 1.0,
+      "val_log_loss": 1.171
+    },
+    {
+      "C": 10.0,
+      "val_macro_f1": 0.9365,
+      "val_accuracy": 0.9375,
+      "val_log_loss": 0.8245
+    },
+    {
+      "C": 100.0,
+      "val_macro_f1": 1.0,
+      "val_accuracy": 1.0,
+      "val_log_loss": 0.5677
+    }
+  ],
+  "selected_C": 100.0,
+  "test": {
+    "accuracy": 0.875,
+    "macro_f1": 0.874,
+    "macro_precision": 0.8875,
+    "macro_recall": 0.875,
+    "per_class": {
+      "phishing": {
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1-score": 0.8571,
+        "support": 4.0
+      },
+      "ransomware": {
+        "precision": 0.8,
+        "recall": 1.0,
+        "f1-score": 0.8889,
+        "support": 4.0
+      },
+      "malware": {
+        "precision": 0.75,
+        "recall": 0.75,
+        "f1-score": 0.75,
+        "support": 4.0
+      },
+      "exploitation": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 4.0
+      }
+    },
+    "confusion_matrix": {
+      "labels": [
+        "phishing",
+        "ransomware",
+        "malware",
+        "exploitation"
+      ],
+      "matrix": [
+        [
+          3,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          4
+        ]
+      ]
+    }
+  },
+  "test_errors": [
+    {
+      "report_id": "CTI-010",
+      "true": "phishing",
+      "pred": "malware",
+      "confidence": 0.474
+    },
+    {
+      "report_id": "CTI-048",
+      "true": "malware",
+      "pred": "ransomware",
+      "confidence": 0.551
+    }
+  ],
+  "baselines_test": {
+    "majority_class": {
+      "accuracy": 0.25,
+      "macro_f1": 0.1,
+      "macro_precision": 0.0625,
+      "macro_recall": 0.25,
+      "per_class": {
+        "phishing": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1-score": 0.4,
+          "support": 4.0
+        },
+        "ransomware": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "malware": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "exploitation": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "phishing",
+          "ransomware",
+          "malware",
+          "exploitation"
+        ],
+        "matrix": [
+          [
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    },
+    "keyword_rules": {
+      "accuracy": 0.875,
+      "macro_f1": 0.8611,
+      "macro_precision": 0.9,
+      "macro_recall": 0.875,
+      "per_class": {
+        "phishing": {
+          "precision": 0.8,
+          "recall": 1.0,
+          "f1-score": 0.8889,
+          "support": 4.0
+        },
+        "ransomware": {
+          "precision": 0.8,
+          "recall": 1.0,
+          "f1-score": 0.8889,
+          "support": 4.0
+        },
+        "malware": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6667,
+          "support": 4.0
+        },
+        "exploitation": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 4.0
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "phishing",
+          "ransomware",
+          "malware",
+          "exploitation"
+        ],
+        "matrix": [
+          [
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            4,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            4
+          ]
+        ]
+      }
+    },
+    "random_forest_tfidf": {
+      "accuracy": 0.75,
+      "macro_f1": 0.7542,
+      "macro_precision": 0.8125,
+      "macro_recall": 0.75,
+      "per_class": {
+        "phishing": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6667,
+          "support": 4.0
+        },
+        "ransomware": {
+          "precision": 0.75,
+          "recall": 0.75,
+          "f1-score": 0.75,
+          "support": 4.0
+        },
+        "malware": {
+          "precision": 0.5,
+          "recall": 0.75,
+          "f1-score": 0.6,
+          "support": 4.0
+        },
+        "exploitation": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 4.0
+        }
+      },
+      "confusion_matrix": {
+        "labels": [
+          "phishing",
+          "ransomware",
+          "malware",
+          "exploitation"
+        ],
+        "matrix": [
+          [
+            2,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            3,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            4
+          ]
+        ]
+      }
+    }
+  },
+  "grouped_cross_validation": {
+    "folds": 5,
+    "grouping": "campaign_id",
+    "accuracy_mean": 0.8968,
+    "accuracy_std": 0.0762,
+    "macro_f1_mean": 0.8806,
+    "macro_f1_std": 0.0815
+  },
+  "top_features": {
+    "exploitation": [
+      [
+        "cvetoken",
+        2.666
+      ],
+      [
+        "exploitation",
+        2.531
+      ],
+      [
+        "exploited",
+        2.335
+      ],
+      [
+        "injection",
+        1.933
+      ],
+      [
+        "vulnerability",
+        1.86
+      ],
+      [
+        "exploit",
+        1.768
+      ],
+      [
+        "vendor",
+        1.416
+      ],
+      [
+        "attackers",
+        1.372
+      ],
+      [
+        "web",
+        1.282
+      ],
+      [
+        "acme vpn",
+        1.227
+      ],
+      [
+        "acme",
+        1.227
+      ],
+      [
+        "vpn",
+        1.181
+      ]
+    ],
+    "malware": [
+      [
+        "backdoor",
+        1.999
+      ],
+      [
+        "quartz",
+        1.558
+      ],
+      [
+        "stealray",
+        1.526
+      ],
+      [
+        "botnet",
+        1.245
+      ],
+      [
+        "rat",
+        1.146
+      ],
+      [
+        "quartz rat",
+        1.146
+      ],
+      [
+        "software",
+        1.145
+      ],
+      [
+        "miner",
+        1.138
+      ],
+      [
+        "cookies",
+        1.11
+      ],
+      [
+        "infected",
+        1.073
+      ],
+      [
+        "hashtoken",
+        1.066
+      ],
+      [
+        "browser",
+        1.049
+      ]
+    ],
+    "phishing": [
+      [
+        "phishing",
+        3.195
+      ],
+      [
+        "emails",
+        1.587
+      ],
+      [
+        "page",
+        1.233
+      ],
+      [
+        "bank",
+        1.205
+      ],
+      [
+        "link",
+        1.167
+      ],
+      [
+        "domain",
+        1.127
+      ],
+      [
+        "email",
+        1.1
+      ],
+      [
+        "payroll",
+        1.043
+      ],
+      [
+        "asked",
+        0.986
+      ],
+      [
+        "portal",
+        0.955
+      ],
+      [
+        "credential",
+        0.937
+      ],
+      [
+        "sent",
+        0.923
+      ]
+    ],
+    "ransomware": [
+      [
+        "ransomware",
+        2.922
+      ],
+      [
+        "ransom",
+        1.841
+      ],
+      [
+        "nightvault",
+        1.712
+      ],
+      [
+        "locker",
+        1.611
+      ],
+      [
+        "glacier",
+        1.456
+      ],
+      [
+        "encryptor",
+        1.423
+      ],
+      [
+        "note",
+        1.411
+      ],
+      [
+        "encrypted",
+        1.385
+      ],
+      [
+        "encryption",
+        1.319
+      ],
+      [
+        "leak site",
+        1.296
+      ],
+      [
+        "leak",
+        1.296
+      ],
+      [
+        "site",
+        1.252
+      ]
+    ]
+  },
+  "limitations": [
+    "Synthetic corpus written by a single annotator: vocabulary is more homogeneous than real CTI.",
+    "16 test documents only: one error changes accuracy by 6.25 points; confidence intervals are wide.",
+    "Results do not demonstrate generalisation to real-world reports."
+  ]
+}

@@ -1,0 +1,3 @@
+NightVault decryptor reliability issues
+
+Victims who paid the NightVault ransom reported that the decryptor failed on large databases, leaving files corrupted. Incident responders recommend testing decryptors on copies only. The encryptor sample ab12b8a1a7f51f0b57174e86bf6bc35ea403a35542c95c5dd5941ec371ebb1b1 is still used by most affiliates, and the C2 198.51.100.77 remains active.

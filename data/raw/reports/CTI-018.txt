@@ -1,0 +1,3 @@
+Business email compromise following AiTM phishing
+
+A manufacturing company suffered a payment fraud after an accountant authenticated on a proxied login page at login-m365-verify.example. The attacker reused the stolen session from 203.0.113.46 and inserted himself in an ongoing conversation with a supplier, changing the bank details of an invoice. The transfer was recovered thanks to a quick reaction by the bank. Phishing awareness and payment verification procedures were reinforced.

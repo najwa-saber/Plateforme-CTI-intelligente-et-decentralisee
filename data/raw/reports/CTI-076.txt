@@ -1,0 +1,3 @@
+IoT camera firmware vulnerability exploited
+
+A buffer overflow in the web interface of IP cameras (CVE-2099-1188) is exploited to install a bot. The exploit is sent from 192.0.2.17 as an HTTP request with an overlong parameter. Thousands of cameras remain unpatched because the vendor has discontinued the product line.

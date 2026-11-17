@@ -1,0 +1,200 @@
+# GitLab CI/CD - Intelligent Decentralized CTI Platform
+# Stages: validate -> lint -> security -> test -> ml-validation (data, training, gate) -> build -> integration -> report.
+# No production deployment is configured. Model promotion is MANUAL and blocked unless the validation gate passes.
+#
+# CI/CD variables (Settings > CI/CD > Variables, masked + protected when relevant):
+#   CI_REGISTRY_*            provided by GitLab when the container registry is enabled (image push on tags only)
+#   No application secret is needed: tests generate throw-away keys (scripts/generate_env.py / tests/conftest.py).
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_COMMIT_TAG
+
+stages: [validate, lint, security, test, ml-validation, build, integration, report]
+
+variables:
+  PYTHON_IMAGE: "python:3.11-slim@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535"
+  NODE_IMAGE: "node:22-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee"
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
+
+.python:
+  image: $PYTHON_IMAGE
+  cache:
+    key: { files: [backend/requirements.lock, frontend/requirements.lock] }
+    paths: [.cache/pip]
+  before_script:
+    - python -m pip install -q -r backend/requirements.txt -c backend/requirements.lock
+    - python -m pip install -q -r frontend/requirements.txt -c frontend/requirements.lock
+    - mkdir -p reports
+
+# ------------------------------------------------------------------ 1. validation
+code:validate:
+  extends: .python
+  stage: validate
+  script:
+    - python -m compileall -q backend frontend data/scripts scripts
+    - python -m pip check
+    - python -c "import yaml,sys; yaml.safe_load(open('docker-compose.yml'))" && echo "docker-compose.yml is valid YAML"
+
+# ------------------------------------------------------------------ 2. lint
+lint:python:
+  stage: lint
+  image: $PYTHON_IMAGE
+  needs: []
+  script:
+    - python -m pip install -q ruff==0.8.4
+    - ruff check --output-format gitlab --output-file gl-code-quality.json backend/app backend/scripts backend/tests frontend scripts data/scripts || (ruff check backend/app backend/scripts backend/tests frontend scripts data/scripts; exit 1)
+  artifacts:
+    when: always
+    reports: { codequality: gl-code-quality.json }
+    expire_in: 30 days
+
+# ------------------------------------------------------------------ 3. security
+security:secrets:
+  stage: security
+  image: { name: "zricethezav/gitleaks:v8.21.2", entrypoint: [""] }
+  script:
+    - gitleaks detect --source . --no-git --redact --report-format json --report-path gitleaks.json -v
+  artifacts: { when: always, paths: [gitleaks.json], expire_in: 30 days }
+
+security:dependencies:
+  extends: .python
+  stage: security
+  script:
+    - python -m pip install -q pip-audit
+    # one run per lock file (the two locks share packages, pip-audit rejects duplicate requirements)
+    - pip-audit --no-deps --disable-pip -r backend/requirements.lock -f json -o reports/pip-audit-backend.json
+    - pip-audit --no-deps --disable-pip -r frontend/requirements.lock -f json -o reports/pip-audit-frontend.json
+  allow_failure: true            # advisory: new CVEs appear without code change; reviewed manually (docs/SECURITY_AUDIT.md)
+  artifacts: { when: always, paths: [reports/], expire_in: 30 days }
+
+# ------------------------------------------------------------------ 4. tests
+test:python:
+  extends: .python
+  stage: test
+  script:
+    - cd backend
+    - python -m pytest -q -m "not live_chain and not live_misp" --junitxml=../reports/pytest-backend.xml
+        --cov=app --cov-report=xml:../reports/coverage-backend.xml --cov-report=term
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    when: always
+    reports:
+      junit: reports/pytest-backend.xml
+      coverage_report: { coverage_format: cobertura, path: reports/coverage-backend.xml }
+    paths: [reports/]
+    expire_in: 30 days
+
+test:hardhat:
+  stage: test
+  image: $NODE_IMAGE
+  cache: { key: { files: [blockchain/package-lock.json] }, paths: [blockchain/node_modules] }
+  script:
+    - cd blockchain && npm ci --no-audit --no-fund && npx hardhat test | tee ../hardhat-test.log
+  artifacts: { when: always, paths: [hardhat-test.log], expire_in: 30 days }
+
+# ------------------------------------------------------------------ 5. ML validation: data, training, gate
+ml:data-validation:
+  extends: .python
+  stage: ml-validation
+  needs: [code:validate]
+  script:
+    - python -I data/scripts/build_corpus.py          # deterministic regeneration + anti-leakage assertion
+    - git diff --exit-code -- data/annotated data/splits data/raw/reports   # committed data == regenerated data
+    - cd backend && python -m app.ml.validate_model --report ../reports/deployed-model-validation.json
+  artifacts: { when: always, paths: [reports/], expire_in: 30 days }
+
+ml:train-candidate:
+  extends: .python
+  stage: ml-validation
+  needs: [ml:data-validation]
+  rules:
+    - changes: [data/**/*, backend/app/ml/**/*]
+    - if: $CI_PIPELINE_SOURCE == "web"            # manual "Run pipeline"
+  script:
+    - export CAND=app/ml/artifacts/candidates/$CI_COMMIT_SHORT_SHA
+    - cd backend && mkdir -p $CAND
+    - python -m app.ml.train --output-dir $CAND
+    - python -m app.ml.validate_model --model-dir $CAND --require-fingerprint   # gate: fails the job if not promotable
+  artifacts:
+    when: always
+    paths: [backend/app/ml/artifacts/candidates/]
+    expire_in: 90 days                            # model + metrics + dataset fingerprint traceable per commit
+
+ml:model-comparison:
+  extends: .python
+  stage: ml-validation
+  needs: [ml:data-validation]
+  when: manual                                    # ~2 min, nested CV of 7 models
+  allow_failure: true
+  script:
+    - cd backend && python -m app.ml.experiments
+  artifacts: { paths: [docs/test-reports/ml_model_comparison.json], expire_in: 90 days }
+
+ml:promote-model:
+  stage: ml-validation
+  image: $PYTHON_IMAGE
+  needs: [ml:train-candidate]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual                                # never automatic
+  allow_failure: false
+  script:
+    - test -f backend/app/ml/artifacts/candidates/$CI_COMMIT_SHORT_SHA/validation_report.json
+    - python -c "import json,sys; r=json.load(open('backend/app/ml/artifacts/candidates/$CI_COMMIT_SHORT_SHA/validation_report.json')); sys.exit(0 if r['promotable'] else 1)"
+    - echo "Candidate validated. Promotion = copy classifier.joblib + metrics.json to backend/app/ml/artifacts/ in a reviewed merge request."
+
+# ------------------------------------------------------------------ 6. Docker images
+build:images:
+  stage: build
+  image: docker:27
+  services: [docker:27-dind]
+  variables: { DOCKER_TLS_CERTDIR: "/certs" }
+  needs: [lint:python, test:python, test:hardhat]
+  script:
+    - docker build -f docker/backend.Dockerfile -t cti-backend:$CI_COMMIT_SHORT_SHA .
+    - docker build -f docker/frontend.Dockerfile -t cti-frontend:$CI_COMMIT_SHORT_SHA .
+    - docker build -f docker/hardhat.Dockerfile -t cti-hardhat:$CI_COMMIT_SHORT_SHA .
+    - |
+      if [ -n "$CI_COMMIT_TAG" ] && [ -n "$CI_REGISTRY" ]; then
+        echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
+        for s in backend frontend hardhat; do
+          docker tag cti-$s:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE/$s:$CI_COMMIT_TAG
+          docker push $CI_REGISTRY_IMAGE/$s:$CI_COMMIT_TAG
+        done
+      fi
+
+# ------------------------------------------------------------------ 7. integration (needs a Docker-capable runner)
+integration:stack:
+  stage: integration
+  image: docker:27
+  services: [docker:27-dind]
+  variables: { DOCKER_TLS_CERTDIR: "/certs" }
+  needs: [build:images]
+  when: manual                                    # heavy; MISP not started (adapter falls back to simulated mode)
+  allow_failure: true                             # external services may be unavailable on shared runners
+  script:
+    - apk add --no-cache python3 py3-requests py3-pip curl
+    - python3 scripts/generate_env.py
+    - docker compose up -d --build postgres hardhat backend
+    - for i in $(seq 1 60); do curl -sf http://docker:8000/health && break; sleep 5; done
+    - sed -i 's|^API_URL=.*|API_URL=http://docker:8000|' .env
+    - python3 -m pip install --break-system-packages -q web3 >/dev/null 2>&1 || true
+    - python3 scripts/run_demo_scenario.py
+  after_script:
+    - docker compose logs backend hardhat > integration-logs.txt 2>&1 || true
+  artifacts: { when: always, paths: [docs/test-reports/demo_scenario_run.json, integration-logs.txt], expire_in: 30 days }
+
+# ------------------------------------------------------------------ 8. report
+report:summary:
+  stage: report
+  image: $PYTHON_IMAGE
+  when: always
+  script:
+    - mkdir -p reports && ls -la reports docs/test-reports || true
+    - echo "Pipeline $CI_PIPELINE_ID - commit $CI_COMMIT_SHA - see job artefacts for JUnit, coverage, model gate, gitleaks."
+  artifacts: { paths: [docs/test-reports/], expire_in: 90 days }

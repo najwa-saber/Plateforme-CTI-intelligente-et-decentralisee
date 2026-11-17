@@ -1,0 +1,3 @@
+AiTM phishing infrastructure expansion
+
+The reverse-proxy phishing operation targeting cloud email expanded with three new hostnames: auth-m365-verify.example, login-m365-verify.example and mfa-m365-verify.example. All of them point to 203.0.113.45 or to the neighbouring 203.0.113.46. The phishing emails now impersonate voicemail notifications. Detection should rely on conditional access policies and token binding rather than on domain block lists alone, because new domains are registered every week.

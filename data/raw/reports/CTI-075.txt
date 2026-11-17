@@ -1,0 +1,3 @@
+Data theft through managed file transfer vulnerability
+
+An extortion group exploited the managed file transfer path traversal (CVE-2099-0602) to steal files from dozens of organisations without deploying any encryption. The exploitation came from 198.51.100.55 and a downloader script was retrieved from http://mft-sync-update.example/a.py. Victims were contacted by email with samples of their stolen data.

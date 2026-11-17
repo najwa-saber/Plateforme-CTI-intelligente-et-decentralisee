@@ -1,0 +1,179 @@
+{
+  "executed_at": "2026-11-17T08:27:31+00:00",
+  "mitre_rules": {
+    "overall": {
+      "tp": 109,
+      "fp": 66,
+      "fn": 34,
+      "precision": 0.6229,
+      "recall": 0.7622,
+      "f1": 0.6855
+    },
+    "most_frequent_false_positives": [
+      [
+        "T1105",
+        8
+      ],
+      [
+        "T1078",
+        5
+      ],
+      [
+        "T1567",
+        4
+      ],
+      [
+        "T1059.004",
+        4
+      ],
+      [
+        "T1110",
+        4
+      ],
+      [
+        "T1190",
+        4
+      ],
+      [
+        "T1539",
+        3
+      ],
+      [
+        "T1584.005",
+        3
+      ]
+    ],
+    "most_frequent_false_negatives": [
+      [
+        "T1566.002",
+        5
+      ],
+      [
+        "T1204.002",
+        4
+      ],
+      [
+        "T1490",
+        4
+      ],
+      [
+        "T1566.001",
+        3
+      ],
+      [
+        "T1486",
+        3
+      ],
+      [
+        "T1056.001",
+        3
+      ],
+      [
+        "T1598.003",
+        2
+      ],
+      [
+        "T1133",
+        2
+      ]
+    ]
+  },
+  "correlation": {
+    "threshold": 0.3,
+    "weights": {
+      "ioc": 0.45,
+      "mitre": 0.2,
+      "text": 0.2,
+      "time": 0.1,
+      "category": 0.05
+    },
+    "pairs": 163,
+    "overall": {
+      "tp": 35,
+      "fp": 0,
+      "fn": 8,
+      "precision": 1.0,
+      "recall": 0.814,
+      "f1": 0.8974,
+      "tn": 120
+    },
+    "detection_rate_by_relation_type": {
+      "none": "0/120",
+      "same_campaign": "4/10",
+      "shared_domain": "10/10",
+      "shared_hash": "8/8",
+      "shared_ip": "12/14",
+      "shared_url": "1/1"
+    },
+    "missed_positive_pairs": [
+      {
+        "pair": [
+          "CTI-001",
+          "CTI-023"
+        ],
+        "type": "shared_ip",
+        "score": 0.2827
+      },
+      {
+        "pair": [
+          "CTI-021",
+          "CTI-026"
+        ],
+        "type": "same_campaign",
+        "score": 0.1272
+      },
+      {
+        "pair": [
+          "CTI-022",
+          "CTI-026"
+        ],
+        "type": "same_campaign",
+        "score": 0.0739
+      },
+      {
+        "pair": [
+          "CTI-022",
+          "CTI-033"
+        ],
+        "type": "shared_ip",
+        "score": 0.285
+      },
+      {
+        "pair": [
+          "CTI-026",
+          "CTI-033"
+        ],
+        "type": "same_campaign",
+        "score": 0.062
+      },
+      {
+        "pair": [
+          "CTI-044",
+          "CTI-054"
+        ],
+        "type": "same_campaign",
+        "score": 0.1077
+      },
+      {
+        "pair": [
+          "CTI-061",
+          "CTI-072"
+        ],
+        "type": "same_campaign",
+        "score": 0.1959
+      },
+      {
+        "pair": [
+          "CTI-065",
+          "CTI-077"
+        ],
+        "type": "same_campaign",
+        "score": 0.2912
+      }
+    ]
+  },
+  "notes": [
+    "Rules and corpus share the same author: MITRE figures are optimistic.",
+    "relations.csv positives are derived from shared gold IOCs and campaign ids; negatives are random pairs of different campaigns (easy negatives)."
+  ]
+}

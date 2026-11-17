@@ -1,0 +1,3 @@
+Spearphishing for information against researchers
+
+Academic researchers working on energy policy were approached by a fictitious journalist asking for an interview. After building trust over several emails, the actor sent a link to a questionnaire hosted at https://press-interview-forms.test/q/7, which required logging in with a university account. The goal was to collect credentials and information about ongoing projects. The domain press-interview-forms.test was linked to 203.0.113.18, previously used in similar social-engineering operations.

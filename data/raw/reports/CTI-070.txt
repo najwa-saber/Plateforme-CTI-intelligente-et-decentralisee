@@ -1,0 +1,3 @@
+Ticketing platform SQL injection - new attack wave
+
+A new wave targeting the ticketing platform SQL injection (CVE-2099-0450) was observed, this time from 192.0.2.44 and 192.0.2.45. The attackers exfiltrated customer support tickets that contained sensitive attachments. Organisations that have not applied the update should consider their instance compromised.

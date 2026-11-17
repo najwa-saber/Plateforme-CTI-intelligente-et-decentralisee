@@ -1,0 +1,3 @@
+Invoice lure with malicious HTML attachment
+
+Finance departments were targeted with emails titled 'Overdue invoice - action required'. The attachment Invoice_8841.html opened a fake webmail login form rendered locally, which avoided URL reputation filters. Captured credentials were sent through a POST request to hxxp://invoice-docs-share[.]test/collect.php. The attachment had the MD5 a158d158545862a3f91096a1a1f8ec7e. Sender addresses spoofed a known supplier and the reply-to header pointed to a free mail service. Users who entered their password were later targeted by business email compromise attempts.

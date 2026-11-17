@@ -1,0 +1,3 @@
+Healthcare ransomware attack disrupts appointments
+
+A clinic network cancelled appointments after its scheduling system was encrypted. The attackers wiped backup snapshots and left a note signed by the Cobalt Mantis group. Payment instructions referred to cobaltmantis-pay.example. The encryptor SHA-256 is 82d5c3fb14c11344096a908be6695b37b1c4a885c80d7de0ae1a34f303e6b38d. Patient data theft is under investigation, and authorities have been notified.

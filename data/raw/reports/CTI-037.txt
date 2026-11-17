@@ -1,0 +1,3 @@
+Ransomware using safe mode reboot
+
+A ransomware strain called Hollowkey reboots Windows machines into safe mode to prevent security tools from starting, then encrypts files. It modifies registry keys to ensure execution in safe mode and deletes recovery points. The sample MD5 is 9a2abda370892bfa4398a22a8d3b0ca0 and its configuration contains the contact address on hollowkey-recovery.test. Encrypted files end with .hkey.

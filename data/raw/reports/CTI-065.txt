@@ -1,0 +1,3 @@
+Windows kernel privilege escalation exploited in the wild
+
+A local privilege escalation in a Windows kernel driver (CVE-2099-0518) is being exploited to obtain SYSTEM privileges after initial access. The exploit triggers a use-after-free in the driver and overwrites a token. The exploit binary SHA-256 is da1e6749f32bf745cd800382d47ee22ecaf3255a38eb496fe72f2290df0d644b. It has been observed in post-exploitation toolkits used by several intrusion sets. The monthly security update fixes the issue.

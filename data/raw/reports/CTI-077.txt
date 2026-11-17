@@ -1,0 +1,3 @@
+Linux privilege escalation exploit published
+
+A public exploit for a Linux kernel race condition (CVE-2099-1250) allows local users to gain root privileges. Attackers already present on web servers used it to escalate privileges. The exploit binary SHA-256 is b815e7fd53f2de30483fd0c4cae0ec1dabafb7e14e899f321a6517247f3eb99f. Distribution vendors have released patched kernels.

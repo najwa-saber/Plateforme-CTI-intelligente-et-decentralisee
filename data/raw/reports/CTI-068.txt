@@ -1,0 +1,3 @@
+Browser zero-day exploited through watering hole
+
+A memory corruption vulnerability in a browser rendering engine (CVE-2099-0733) was exploited as a zero-day. A compromised news website in the energy sector served the exploit from https://news-energy-today.example/js/analytics.js. Successful exploitation led to the execution of a first stage with SHA-256 fc8e2c5f3114cb780528297cab460a49b5d2e9a3bcf592f3d7ecdebaaa2e5d62. The browser vendor released an emergency update.

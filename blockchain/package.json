@@ -1,0 +1,19 @@
+﻿{
+  "name": "cti-validation-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Solidity smart contracts for collaborative CTI validation (Hardhat)",
+  "license": "MIT",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "node": "hardhat node --hostname 0.0.0.0",
+    "deploy:localhost": "hardhat run scripts/deploy.js --network localhost"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "5.0.0",
+    "@openzeppelin/contracts": "5.4.0",
+    "hardhat": "2.29.2"
+  }
+}

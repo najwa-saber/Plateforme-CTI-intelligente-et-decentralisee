@@ -1,0 +1,3 @@
+Parcel delivery SMS phishing wave
+
+A smishing wave impersonating a national postal service asked recipients to pay a small customs fee. Text messages contained the short link http://track-parcel-delivery.test/p/8812. The landing page collected card numbers, expiry dates and one-time passwords. The domain track-parcel-delivery.test rotated hosting between 192.0.2.61 and 192.0.2.62. Messages were sent from foreign mobile numbers and the kit geo-fenced visitors so that crawlers outside the target country only saw a blank page.

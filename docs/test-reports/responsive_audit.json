@@ -1,0 +1,111 @@
+{
+  "executed_at": "2026-11-17",
+  "method": "Built-in browser, device emulation 375x812 (mobile, touch UA) and 768x1024 (tablet), live stack http://127.0.0.1:8501. Per page: document.scrollWidth vs innerWidth, elements of stMain whose right edge exceeds the viewport (dataframes, Plotly and code blocks excluded: they scroll internally by design), count of stException.",
+  "mobile_375": {
+    "dashboard": {
+      "theme": "dark",
+      "page_scroll_width": 375,
+      "exceptions": 0,
+      "overflowing": []
+    },
+    "import_cti": {
+      "theme": "light",
+      "page_scroll_width": 375,
+      "exceptions": 0,
+      "overflowing": [
+        "stTab (tab bar scrolls horizontally, native Streamlit)"
+      ]
+    },
+    "analysis": {
+      "theme": "dark",
+      "page_scroll_width": 375,
+      "exceptions": 0,
+      "overflowing": [
+        "stTab (native tab bar scroll)"
+      ]
+    },
+    "misp": {
+      "theme": "light",
+      "page_scroll_width": 375,
+      "exceptions": 0,
+      "overflowing_before_fix": [
+        "cti-badge (long MISP machine tags, white-space:nowrap)"
+      ],
+      "overflowing_after_fix": []
+    },
+    "blockchain": {
+      "theme": "dark",
+      "page_scroll_width": 375,
+      "exceptions": 0,
+      "overflowing": []
+    },
+    "reliability": {
+      "theme": "light",
+      "page_scroll_width": 375,
+      "exceptions": 0,
+      "overflowing": []
+    },
+    "correlation": {
+      "theme": "dark",
+      "page_scroll_width": 375,
+      "exceptions": 0,
+      "overflowing": []
+    },
+    "documentation": {
+      "theme": "light",
+      "page_scroll_width": 375,
+      "exceptions": 0,
+      "overflowing": []
+    }
+  },
+  "tablet_768": {
+    "misp": {
+      "theme": "dark",
+      "page_scroll_width": 768,
+      "exceptions": 0,
+      "badges_overflowing": 0
+    },
+    "analysis": {
+      "theme": "light",
+      "page_scroll_width": 768,
+      "exceptions": 0
+    }
+  },
+  "issues_found": [
+    "Sidebar forced open (initial_sidebar_state='expanded') covered the content on phone and tablet",
+    "Long MISP tags (sha256, galaxy) overflowed the viewport on the MISP page",
+    "Medium widths (~800-1200 px with sidebar open): KPI cards and charts too narrow"
+  ],
+  "fixes": [
+    "frontend/app.py: initial_sidebar_state='auto' (open on desktop, collapsed on small screens)",
+    "frontend/components/theme.py: @media (max-width:800px) .cti-badge { white-space:normal; overflow-wrap:anywhere; max-width:100% }",
+    "frontend/components/theme.py: @media (max-width:1200px) columns wrap; min-width 140 px for KPI cards, 260 px for other columns"
+  ],
+  "verification_after_fix": {
+    "container": "frontend rebuilt (docker compose up -d --build --no-deps frontend)",
+    "misp_mobile": {
+      "sidebar_expanded": "false",
+      "badges": 13,
+      "badges_overflowing": 0,
+      "page_scroll_width": 375
+    },
+    "ui_tests": "frontend/tests 19 passed in 10.03s",
+    "dependency_upgrade": "re-verified with Streamlit 1.67.0 / Pillow 13.0.0: mobile dashboard 0 overflow, MISP badges 0 overflow, 0 exceptions; UI tests 19 passed"
+  },
+  "intermediate_820": {
+    "before_fix": {
+      "dashboard_kpi_card_width_px": 66,
+      "symptom": "6 KPI cards squeezed beside the sidebar, labels broken mid-word ('RAPPO RTS')"
+    },
+    "after_fix": {
+      "dashboard_kpi_cards": "3 per row, 149 px each",
+      "charts": "one per row, 478 px",
+      "page_scroll_width": 820
+    }
+  },
+  "desktop_1366_after_fix": {
+    "dashboard_kpi_cards": "6 per row, 136 px each (unchanged)",
+    "charts": "3 per row",
+    "page_scroll_width": 1366
+  }
+}

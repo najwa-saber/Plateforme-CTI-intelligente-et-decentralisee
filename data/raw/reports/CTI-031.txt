@@ -1,0 +1,3 @@
+LockMare exfiltration tooling
+
+Before deploying LockMare, the affiliates exfiltrate data with a renamed sync utility to 198.51.100.88. The extortion note claims the publication of stolen documents on lockmare-pay.test if no payment is received. Investigators recovered the locker with MD5 7ccb9f68bfa7dafa8368fcc001b21254 on three domain controllers. Victims are mainly logistics and transport companies.

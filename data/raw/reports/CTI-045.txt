@@ -1,0 +1,3 @@
+Cryptominer botnet targeting Linux servers
+
+A botnet exploits weak SSH passwords to install a cryptocurrency miner on Linux servers. A shell script removes competing miners, adds a cron job and downloads the miner from http://198.51.100.101/xmr.tar. The mining pool proxy is pool-proxy-relay.example. Infected servers show constant high CPU usage. The miner binary SHA-256 is 2837117cca6267e1ad5344abe287a68e9b0009fb74b27e5b0d5cad97af6b9eef.

@@ -1,0 +1,3 @@
+Modular backdoor with encrypted C2
+
+A modular backdoor named Silt uses a custom encrypted protocol over HTTPS to reach silt-cdn-edge.example. Modules provide screen capture, credential dumping and proxy capabilities. The core module has SHA-256 8bfff66a440809596400d25809150f2d7dec0f46e8899d5d95601ae3ed974711. The backdoor was found on servers of a telecommunications operator.

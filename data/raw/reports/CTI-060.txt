@@ -1,0 +1,3 @@
+Malvertising campaign delivering remote access tool
+
+Search engine advertisements for popular software led users to fake download pages at get-software-free.test. The installer bundled a legitimate program with a remote access tool (MD5 69d43553b0711cd27bbb77c978770ef3) which connects to 203.0.113.71. The operators use the access to deploy additional malware selectively.

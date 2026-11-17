@@ -1,0 +1,3 @@
+Data leak site publishes NightVault victims
+
+The NightVault leak site listed eleven new victims this month, including a law firm and two municipalities. Stolen archives are published when the ransom deadline expires. The group uses a file-sharing mirror at nv-files-mirror.example to distribute archives. Negotiators demand payment within seven days and threaten to contact customers of the victim. The encryption component is unchanged since February.

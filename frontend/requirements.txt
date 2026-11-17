@@ -1,0 +1,7 @@
+streamlit>=1.67,<1.68        # security: PYSEC-2026-212, PYSEC-2026-2285 (fixed in 1.53.1 / 1.54.0)
+pillow>=13,<14               # transitive (streamlit): 50+ advisories fixed in 13.0.0
+plotly>=5.24,<6.1
+pandas>=2.2,<2.3
+networkx>=3.3,<3.5
+requests>=2.32,<3
+python-dotenv>=1.0,<2

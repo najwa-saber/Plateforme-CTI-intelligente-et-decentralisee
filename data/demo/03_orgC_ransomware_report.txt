@@ -1,0 +1,8 @@
+Ransomware intrusion at a logistics provider (synthetic exercise)
+
+The Driftlock ransomware encrypted the file servers and the backup appliance of a logistics provider over a
+weekend. The operators deleted volume shadow copies with vssadmin, stopped the database services and dropped a
+ransom note named HOW_TO_RESTORE.txt. The locker binary has SHA-256
+3a7bd3e2360a3d29eea436fcfb7e44c735d117c42d1c1835420b6b9942dd4f1b and communicated with 198.51.100.240 before
+encryption. Initial access is suspected to come from stolen VPN credentials. The ransom note points to
+driftlock-recovery.test and requests payment in bitcoin within 72 hours.

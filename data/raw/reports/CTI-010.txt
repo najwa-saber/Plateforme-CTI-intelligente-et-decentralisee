@@ -1,0 +1,3 @@
+CV-themed phishing delivering a password stealer
+
+Recruiters received emails from fake candidates with a ZIP archive named Resume_Julia.zip. The archive contained a shortcut file that downloaded a small password stealer from hxxp://cv-portfolio-host[.]example/files/resume.bin. The dominant activity is the phishing delivery; the payload (SHA-256 349a6e19a66a3730b6e5fd625a8ac4190fcd5a9344d4c14b1473991c784890c1) only collected browser passwords. The social-engineering pretext was carefully crafted around open job offers published on LinkedIn.

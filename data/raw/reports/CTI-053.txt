@@ -1,0 +1,3 @@
+DLL side-loading backdoor in signed application
+
+A backdoor named Lantern is loaded through DLL side-loading: a legitimate signed executable loads a malicious DLL placed in the same folder. Lantern communicates with lantern-telemetry.invalid over HTTPS and supports file upload and command execution. The DLL MD5 is 45a4be9ec80bcd7687c9e95335815e70. The legitimate executable helps the malware evade application allow-listing.

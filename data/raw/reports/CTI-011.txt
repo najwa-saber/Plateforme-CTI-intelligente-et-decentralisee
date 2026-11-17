@@ -1,0 +1,3 @@
+Fake shared-drive notification phishing
+
+Users were notified that a colleague had shared a confidential spreadsheet. The button led to a lookalike file-sharing portal at drive-share-files.test, which asked for corporate credentials before displaying the document. Credential submissions were forwarded to 198.51.100.190. The emails came from compromised accounts of partner companies, so the sender reputation was good and the messages bypassed filtering. Security awareness teams should remind staff to open shared documents from the official application only.

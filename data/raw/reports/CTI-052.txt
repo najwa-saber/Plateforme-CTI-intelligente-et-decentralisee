@@ -1,0 +1,3 @@
+Trojanised software package in a public repository
+
+A package published in a public code repository imitated a popular logging library. Its install script downloaded a backdoor from hxxp://pkg-mirror-cdn[.]example/lib/init.bin and executed it on developer machines. The backdoor (SHA-256 4f86a8637c572d164e575243aa1735095c5da68e91bf5d8ad859499914dec34b) stole SSH keys and cloud tokens. The package was downloaded 1,200 times before removal.

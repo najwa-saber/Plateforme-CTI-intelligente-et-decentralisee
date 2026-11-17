@@ -1,0 +1,3 @@
+Quartz remote access trojan capabilities
+
+The Quartz RAT gives its operator full control of the infected host: keylogging, webcam capture, file management and a remote shell. Persistence is obtained through a Run registry key named 'OneDriveSync'. The implant beacons every 60 seconds to 192.0.2.150 on port 4444 and falls back to quartz-update.test. The dropper MD5 is 50b96a1b663dcaac5dde54ee83ef7b28. Traffic is encrypted with a static key.

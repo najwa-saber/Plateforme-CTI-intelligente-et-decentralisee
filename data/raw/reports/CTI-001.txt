@@ -1,0 +1,3 @@
+Payroll credential harvesting campaign
+
+Between 2 and 3 February, employees of several logistics firms received emails claiming that their salary slip was available. The message urged recipients to confirm their identity before the payment date. The link pointed to hxxps://payroll-portal-secure[.]example/verify, a cloned single sign-on page hosted on 198.51.100.24. Submitted usernames and passwords were posted to a PHP collector. The sender domain payroll-portal-secure.example was registered two days before the campaign. No attachment was used; the operation relied entirely on credential theft through a spoofed portal.

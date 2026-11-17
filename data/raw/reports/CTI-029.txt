@@ -1,0 +1,3 @@
+Glacier ransomware new Linux build
+
+A new build of the Glacier Linux locker adds intermittent encryption: only parts of each large file are encrypted to speed up the attack. The binary (SHA-256 0a9e39787748450bce57034693698405e02dd8b83708d3ed22e9dff737e2d43b) is still retrieved from 203.0.113.99. The ransom note now includes a chat identifier and a deadline of 72 hours. Hypervisor administrators should disable unnecessary shell access.

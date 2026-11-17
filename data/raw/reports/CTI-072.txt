@@ -1,0 +1,3 @@
+Second vulnerability in Acme VPN gateway
+
+A second vulnerability affecting Acme VPN gateways (CVE-2099-0957), a stack overflow in the SAML handler, is now exploited. Attackers chain it with the earlier authentication bypass. Exploitation traffic was seen from 198.51.100.141 and 198.51.100.142. The vendor published mitigation XML files pending a permanent fix.

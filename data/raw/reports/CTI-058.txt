@@ -1,0 +1,3 @@
+Quartz RAT used by multiple actors
+
+The Quartz RAT builder leaked on a forum and is now used by several unrelated actors. Samples share the same code but different C2 servers. One recent build still uses quartz-update.test, while another one connects to 198.51.100.205. Attribution based solely on the malware family is therefore unreliable.

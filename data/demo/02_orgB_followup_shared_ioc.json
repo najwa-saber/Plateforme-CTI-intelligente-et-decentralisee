@@ -1,0 +1,13 @@
+{
+  "title": "Credential phishing kit reused against logistics companies",
+  "text": "Organisation B observed the same credential phishing kit on 14 November 2026. The lure now announces a parcel delay and asks the recipient to log in to track the shipment. The link points to hxxps://secure-hr-portal[.]example/track, the domain already used in the HR-themed campaign, and a new landing page hosted on 203.0.113.67. The fake login page captures corporate credentials and session cookies. Users were redirected to the legitimate website after submitting their password, which delayed the detection.",
+  "source": "Organisation B CERT",
+  "published_at": "2026-11-14",
+  "tlp": "TLP:GREEN",
+  "category": "phishing",
+  "mitre_techniques": ["T1566.002"],
+  "iocs": [
+    {"type": "domain", "value": "secure-hr-portal.example"},
+    {"type": "ipv4", "value": "203.0.113.67"}
+  ]
+}

@@ -1,0 +1,3 @@
+StealRay panel exposed
+
+Researchers found an exposed StealRay administration panel on 203.0.113.88. It contained logs from 4,000 victims including browser passwords and session cookies. The panel software matches the stealer sample 97d5bba19c2dc2af1f218286daaacb3e3a5e6d8a98b1fb97724c0fd54c8f0e4f. Affected companies were notified through national CERTs.

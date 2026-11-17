@@ -1,0 +1,3 @@
+Crypto wallet phishing via fake support portal
+
+Users of a cryptocurrency wallet were contacted on social media by fake support agents. They were asked to 'synchronise' their wallet on wallet-sync-support.example, which requested the recovery phrase. Several victims lost funds within minutes. The phishing site was served from 192.0.2.88 and protected by a reverse proxy. The legitimate project never asks users to share their seed phrase.

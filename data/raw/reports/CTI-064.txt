@@ -1,0 +1,3 @@
+Web shells found on Acme VPN appliances after patching
+
+Even after patching CVE-2099-0142, several organisations discovered web shells left on their Acme VPN appliances. The implants survive updates by modifying a system script. Investigators identified the web shell file with MD5 0b30df529275994ec6c2ecc8b2ab5963. Connections to the shells came from 198.51.100.140 and 198.51.100.141. A full factory reset is recommended for compromised devices.

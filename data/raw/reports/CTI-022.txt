@@ -1,0 +1,3 @@
+NightVault affiliate playbook
+
+Analysis of a leaked NightVault affiliate playbook shows a standard double-extortion workflow: initial access is bought from brokers, domain admin rights are obtained, backups are destroyed and the locker is deployed through group policy. The playbook references the negotiation portal nvault7xk2qpl4mzd3r5t6y7u8i9o0p1a2s3d4f5g6h7j8k9l0zxcv.onion and the staging server 198.51.100.77. Affiliates receive 80 percent of the ransom payment, which is requested in cryptocurrency.

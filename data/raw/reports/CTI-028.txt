@@ -1,0 +1,3 @@
+Ransomware incident at a manufacturing plant
+
+Production lines stopped after a ransomware attack encrypted the engineering workstations. The attackers stopped database and backup services before launching the encryption, then left a note named RESTORE-FILES.txt. Investigation found the binary svchosts.exe with MD5 71bb27e391dd8596ebbbf9ada0e56410. Network logs showed outbound traffic to restore-files-help.invalid and 198.51.100.230. The company restored from offline backups and did not pay.

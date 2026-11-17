@@ -1,0 +1,3 @@
+Destructive wiper targeting energy companies
+
+A wiper named Ashfall overwrote the master boot record and the first megabytes of every file on infected machines of an energy company. Unlike ransomware, no ransom was requested and recovery was impossible without backups. The wiper was deployed via group policy from a compromised domain controller. The sample has SHA-256 9e3069b9197098768f1e7ef7bb50649483ef76c74ede8a9d60b1f4d8a8721b21 and contacted 203.0.113.33 to report completion.

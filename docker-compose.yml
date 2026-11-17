@@ -1,0 +1,238 @@
+# Intelligent Decentralized CTI Platform - reproducible environment
+#   Core stack : docker compose up -d --build
+#   With MISP  : docker compose --profile misp up -d --build
+# All ports are bound to 127.0.0.1 (lab environment, nothing exposed on the LAN).
+name: cti-platform
+
+services:
+  postgres:
+    image: postgres:16-alpine@sha256:81e77a4833487b8132fe4b00bedd39dc3f74b8641e387f19312a48f7de218c2e
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-cti}
+      POSTGRES_USER: ${POSTGRES_USER:-cti}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env (python scripts/generate_env.py)}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-5432}:5432"
+    networks: [cti]
+    restart: unless-stopped
+
+  hardhat:
+    build:
+      context: .
+      dockerfile: docker/hardhat.Dockerfile
+    environment:
+      ORG_A_NAME: ${ORG_A_NAME:-Organisation A}
+      ORG_B_NAME: ${ORG_B_NAME:-Organisation B}
+      ORG_C_NAME: ${ORG_C_NAME:-Organisation C}
+      ORG_A_ACCOUNT_INDEX: ${ORG_A_ACCOUNT_INDEX:-1}
+      ORG_B_ACCOUNT_INDEX: ${ORG_B_ACCOUNT_INDEX:-2}
+      ORG_C_ACCOUNT_INDEX: ${ORG_C_ACCOUNT_INDEX:-3}
+      VOTING_PERIOD_SECONDS: ${VOTING_PERIOD_SECONDS:-604800}
+    volumes:
+      - deployments:/deployments
+    ports:
+      - "127.0.0.1:8545:8545"
+    networks: [cti]
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-cti}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-cti}
+      ETH_RPC_URL: http://hardhat:8545
+      ETH_DEPLOYMENT_FILE: /deployments/localhost.json
+      MISP_URL: ${MISP_INTERNAL_URL:-https://misp-nginx:8443}
+      CORS_ORIGINS: http://localhost:8501
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+    volumes:
+      - deployments:/deployments:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      hardhat:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks: [cti]
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    environment:
+      API_URL: http://backend:8000
+      PUBLIC_API_URL: http://localhost:8000
+      ORG_A_NAME: ${ORG_A_NAME:-Organisation A}
+      ORG_B_NAME: ${ORG_B_NAME:-Organisation B}
+      ORG_C_NAME: ${ORG_C_NAME:-Organisation C}
+      ORG_A_API_KEY: ${ORG_A_API_KEY:?Set ORG_A_API_KEY in .env}
+      ORG_B_API_KEY: ${ORG_B_API_KEY:?Set ORG_B_API_KEY in .env}
+      ORG_C_API_KEY: ${ORG_C_API_KEY:?Set ORG_C_API_KEY in .env}
+      MISP_PUBLIC_URL: ${MISP_PUBLIC_URL:-https://localhost:8443}
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8501:8501"
+    networks: [cti]
+    restart: unless-stopped
+
+  # ------------------------------------------------------------------ MISP (profile "misp")
+  misp-db:
+    image: mariadb:10.11@sha256:7d829180b5b2a9ba74f6242876ab401a0d7dd338a807e522ef92bc9698760f20
+    profiles: ["misp"]
+    environment:
+      MYSQL_USER: misp
+      MYSQL_PASSWORD: ${MISP_DB_PASSWORD:-change-me}
+      MYSQL_ROOT_PASSWORD: ${MISP_DB_ROOT_PASSWORD:-change-me-root}
+      MYSQL_DATABASE: misp
+    command: ["--innodb-buffer-pool-size=512M", "--innodb-log-file-size=128M", "--max-allowed-packet=256M"]
+    volumes:
+      - misp_mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -u misp --password=$${MYSQL_PASSWORD} --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    networks: [cti]
+    restart: unless-stopped
+
+  misp-redis:
+    image: valkey/valkey:7.2@sha256:828b1cbb1c258e02b9cd9588063fa997e097444e610d3f3c00d43e21400e2b8d
+    profiles: ["misp"]
+    command: ["valkey-server", "--requirepass", "${MISP_REDIS_PASSWORD:-change-me-redis}"]
+    environment:
+      REDISCLI_AUTH: ${MISP_REDIS_PASSWORD:-change-me-redis}
+    healthcheck:
+      test: ["CMD-SHELL", "valkey-cli ping | grep -q PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [cti]
+    restart: unless-stopped
+
+  misp-modules:
+    image: ghcr.io/misp/misp-docker/misp-modules:latest@sha256:36e25925456ae510c71fc5c6c5b45ad2c3c9bacf19d1c981ccecfea0e8e8edd6
+    profiles: ["misp"]
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/localhost/6666'"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    networks: [cti]
+    restart: unless-stopped
+
+  # One-shot: self-signed TLS certificate for the lab MISP (stored in a named volume, never in Git)
+  misp-certs:
+    image: ghcr.io/misp/misp-docker/misp-core:latest@sha256:4b43b036962a1996ec23ba2ce619f88c8ad64a48729867348ae8dcf0dd9061db
+    profiles: ["misp"]
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        set -e
+        if [ ! -f /certs/cert.pem ] || [ ! -f /certs/key.pem ]; then
+          openssl req -x509 -newkey rsa:2048 -nodes -days 825 -subj "/CN=localhost"             -addext "subjectAltName=DNS:localhost,DNS:misp-nginx"             -keyout /certs/key.pem -out /certs/cert.pem 2>/dev/null
+          echo "self-signed certificate generated"
+        fi
+        chgrp 101 /certs/cert.pem /certs/key.pem && chmod 640 /certs/key.pem && chmod 644 /certs/cert.pem
+    volumes:
+      - misp_ssl:/certs
+    networks: [cti]
+    restart: "no"
+
+  # PHP-FPM application (MISP >= 2.5 images: the web server is the separate misp-nginx container)
+  misp-core:
+    image: ghcr.io/misp/misp-docker/misp-core:latest@sha256:4b43b036962a1996ec23ba2ce619f88c8ad64a48729867348ae8dcf0dd9061db
+    profiles: ["misp"]
+    environment:
+      BASE_URL: ${MISP_PUBLIC_URL:-https://localhost:8443}
+      ADMIN_EMAIL: ${MISP_ADMIN_EMAIL:-admin@cti-consortium.test}
+      ADMIN_PASSWORD: ${MISP_ADMIN_PASSWORD:-change-me-admin}
+      ADMIN_KEY: ${MISP_KEY:?Set MISP_KEY (40 chars) in .env}
+      ADMIN_ORG: CTI-Consortium
+      MYSQL_HOST: misp-db
+      MYSQL_PORT: "3306"
+      MYSQL_USER: misp
+      MYSQL_PASSWORD: ${MISP_DB_PASSWORD:-change-me}
+      MYSQL_DATABASE: misp
+      REDIS_HOST: misp-redis
+      REDIS_PORT: "6379"
+      REDIS_PASSWORD: ${MISP_REDIS_PASSWORD:-change-me-redis}
+      MISP_MODULES_FQDN: http://misp-modules
+      DISABLE_IPV6: "true"
+      DISABLE_PRINTING_PLAINTEXT_CREDENTIALS: "true"
+    volumes:
+      - misp_configs:/var/www/MISP/app/Config
+      - misp_logs:/var/www/MISP/app/tmp/logs
+      - misp_files:/var/www/MISP/app/files
+      - misp_gnupg:/var/www/MISP/.gnupg
+    depends_on:
+      misp-db:
+        condition: service_healthy
+      misp-redis:
+        condition: service_healthy
+      misp-modules:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'echo > /dev/tcp/127.0.0.1/9002'"]
+      interval: 10s
+      timeout: 2s
+      retries: 30
+      start_period: 60s
+    cap_add: [AUDIT_WRITE]
+    networks: [cti]
+    restart: unless-stopped
+
+  misp-nginx:
+    image: ghcr.io/misp/misp-docker/misp-nginx:latest@sha256:84bc3a6587eec76bc8d5285bf7b60a46cc89281367de0675dc97b87913b24c4f
+    profiles: ["misp"]
+    environment:
+      BASE_URL: ${MISP_PUBLIC_URL:-https://localhost:8443}
+      DISABLE_IPV6: "true"
+      FASTCGI_LISTEN: misp-core:9002
+      FASTCGI_LISTEN_STATUS: misp-core:9003
+      NGINX_CLIENT_MAX_BODY_SIZE: 50M
+    volumes:
+      - misp_ssl:/etc/nginx/certs:ro
+    tmpfs:
+      - /etc/nginx/conf.d:mode=0755,uid=101,gid=101
+      - /var/cache/nginx:mode=0755,uid=101,gid=101
+      - /tmp:mode=1777
+    user: nginx
+    read_only: true
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    depends_on:
+      misp-certs:
+        condition: service_completed_successfully
+      misp-core:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8443:8443"
+    networks: [cti]
+    restart: unless-stopped
+
+networks:
+  cti:
+    name: cti-net
+
+volumes:
+  pg_data:
+  deployments:
+  misp_mysql:
+  misp_configs:
+  misp_logs:
+  misp_files:
+  misp_ssl:
+  misp_gnupg:

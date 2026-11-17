@@ -1,0 +1,3 @@
+Banking trojan web injects targeting European banks
+
+The Vesper banking trojan injects fake forms into online banking pages to capture one-time codes and initiate fraudulent transfers. Its web-inject configuration is downloaded from vesper-cfg.test and targets twelve European banks. The trojan is installed by a loader (SHA-256 1bc30080a03f5e9c2a244feacaf2f67a905831cbb4e0d2c1b630cda91876aed8). Infected hosts communicate with 198.51.100.150.

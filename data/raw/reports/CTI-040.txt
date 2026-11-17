@@ -1,0 +1,3 @@
+Glacier operators exploit weak hypervisor passwords
+
+Glacier operators continue to target virtualisation clusters, this time using weak passwords on management interfaces exposed to the internet. After logging in, they encrypt virtual disks with the locker downloaded from http://203.0.113.99/g.sh. Victims include two hosting providers, which affected hundreds of downstream customers.

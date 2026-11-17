@@ -1,0 +1,7 @@
+Analyst notes with noisy indicators (robustness demo)
+
+The sample beaconed to 198.51.100.300 (typo in the original ticket) and to 192.0.2.44, then again to 192.0.2.44.
+It downloaded update.exe and invoice.pdf from hxxp://cdn-sync-update[.]test/files/. A truncated hash
+c4ca4238a0b923820dcc509a6f75849 was copied from a chat message. The analyst also pasted the SHA-256 of an empty
+file: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Internal host 10.20.30.40 was infected.
+Legitimate update traffic to microsoft.com was also present in the logs.

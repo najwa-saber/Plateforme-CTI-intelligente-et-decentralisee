@@ -1,0 +1,3 @@
+Android spyware disguised as a messaging app
+
+A spyware application distributed outside official stores imitates a secure messaging app. It records calls, reads SMS messages and tracks the location of the device. Data is sent to chat-secure-sync.test. The APK SHA-256 is 14c273f23621d3d0decb46bba45e35c28293e709c9e313ea39cfc6e213736e32. The campaign targets activists and journalists in specific regions.

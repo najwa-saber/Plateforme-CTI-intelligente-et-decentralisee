@@ -1,0 +1,3 @@
+Second wave of the payroll portal phishing
+
+The payroll-themed operation observed earlier this month resumed with new wording about a bonus payment. The kit is unchanged and still posts stolen credentials to 198.51.100.24. A new lookalike domain, payroll-bonus-secure.example, was added alongside the original payroll-portal-secure.example. Emails were sent through a compromised newsletter account, which explains the valid SPF results. Recipients were mainly HR and accounting staff of mid-sized companies.

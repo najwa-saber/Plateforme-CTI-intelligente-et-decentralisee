@@ -1,0 +1,3 @@
+Exploitation of a JavaScript framework prototype pollution
+
+A prototype pollution issue in a server-side JavaScript framework (CVE-2099-1333) can lead to remote code execution. Exploitation attempts targeted e-commerce websites and came from 203.0.113.120. The payload attempted to download a script from http://node-pkg-cache.test/p.js. Developers should upgrade the dependency and validate JSON input.

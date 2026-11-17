@@ -1,0 +1,3 @@
+Adversary-in-the-middle phishing against Microsoft 365 tenants
+
+A reverse-proxy phishing kit is being used to bypass multi-factor authentication. Victims receive a shared-document notification and are redirected to https://login-m365-verify.example/common/oauth2. The proxy relays the real sign-in flow and steals the session cookie once MFA is completed, allowing the attacker to replay the token. Infrastructure resolved to 203.0.113.45. Within hours, inbox rules were created to hide security alerts. Organisations should monitor impossible-travel sign-ins and token reuse originating from login-m365-verify.example.

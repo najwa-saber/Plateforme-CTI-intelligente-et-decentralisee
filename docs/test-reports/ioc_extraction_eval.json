@@ -1,0 +1,126 @@
+{
+  "executed_at": "2026-11-16T20:06:16+00:00",
+  "corpus": {
+    "overall": {
+      "tp": 182,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "per_type": {
+      "domain": {
+        "tp": 39,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ipv4": {
+        "tp": 65,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "md5": {
+        "tp": 18,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "sha256": {
+        "tp": 28,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "url": {
+        "tp": 32,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "items": 80,
+    "errors": []
+  },
+  "challenge": {
+    "overall": {
+      "tp": 30,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.9677,
+      "recall": 1.0,
+      "f1": 0.9836
+    },
+    "per_type": {
+      "domain": {
+        "tp": 12,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ipv4": {
+        "tp": 6,
+        "fp": 1,
+        "fn": 0,
+        "precision": 0.8571,
+        "recall": 1.0,
+        "f1": 0.9231
+      },
+      "md5": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "sha256": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "url": {
+        "tp": 8,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "items": 25,
+    "errors": [
+      {
+        "id": "CH-06",
+        "false_positives": [
+          [
+            "ipv4",
+            "4.12.0.3"
+          ]
+        ],
+        "false_negatives": []
+      }
+    ]
+  },
+  "notes": [
+    "corpus: same author for corpus and extractor, one rule (.onion) added after inspecting corpus errors -> optimistic estimate.",
+    "challenge: written after the extractor was frozen and evaluated once, no tuning afterwards."
+  ]
+}

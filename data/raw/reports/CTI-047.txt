@@ -1,0 +1,3 @@
+Quartz RAT new variant with plugin system
+
+A new Quartz variant supports downloadable plugins for password recovery and remote desktop. The main implant still beacons to 192.0.2.150, while plugins are retrieved from http://quartz-update.test/plugins/rdp.bin. The sample hash is 7ce594710cd30a39965336c01e0032cf. Antivirus detection rates remain low because each build is packed differently.

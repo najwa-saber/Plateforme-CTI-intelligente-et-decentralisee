@@ -1,0 +1,13 @@
+Phishing campaign impersonating the HR self-service portal
+
+Summary: Since 9 November 2026, employees of several engineering companies have received emails announcing
+an "annual salary review" that required them to sign a document on the HR portal. The emails were sent from
+hr-notifications@secure-hr-portal.example and contained a link to hxxps://secure-hr-portal[.]example/sso/login,
+a cloned single sign-on page. Credentials entered on the fake login page were posted to a collector hosted on
+203.0.113.66. A second wave used an HTML attachment (Salary_Review_2026.html, MD5 9e107d9d372bb6826bd81d3542a419d6)
+that rendered the same fake portal locally to evade URL filtering.
+
+The domain secure-hr-portal.example was registered three days before the first emails. Stolen accounts were
+later used to send internal phishing messages to colleagues. No malware was dropped: the objective is
+credential harvesting. Recommended actions: block the domain and the IP address, reset the passwords of users
+who clicked the link, and search mail logs for the sender domain.

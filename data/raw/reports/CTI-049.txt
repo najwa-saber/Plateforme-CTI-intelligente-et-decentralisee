@@ -1,0 +1,3 @@
+Malicious browser extension stealing sessions
+
+A malicious browser extension posing as a PDF converter was installed by thousands of users. It reads cookies of social and banking websites and sends them to https://ext-analytics-hub.example/collect. The extension package hash is 5f08058cfeae1e4f7ca5e283b6d64ba825e038b776d44de560ebcebfebd0f593. Session cookies are then used to hijack accounts without passwords. The extension has been removed from the store, but local installations remain.
