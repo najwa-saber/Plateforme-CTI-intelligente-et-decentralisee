@@ -103,8 +103,13 @@ ml:data-validation:
   stage: ml-validation
   needs: [code:validate]
   script:
+    # committed data == regenerated data (the python image has no git: snapshot, regenerate, byte-compare)
+    - mkdir -p /tmp/committed && cp -r data/annotated data/splits data/raw/reports /tmp/committed/
     - python -I data/scripts/build_corpus.py          # deterministic regeneration + anti-leakage assertion
-    - git diff --exit-code -- data/annotated data/splits data/raw/reports   # committed data == regenerated data
+    - diff -r /tmp/committed/annotated data/annotated      # one command per line: any difference fails the job
+    - diff -r /tmp/committed/splits data/splits
+    - diff -r /tmp/committed/reports data/raw/reports
+    - echo "regenerated corpus identical to the committed corpus"
     - cd backend && python -m app.ml.validate_model --report ../reports/deployed-model-validation.json
   artifacts: { when: always, paths: [reports/], expire_in: 30 days }
 

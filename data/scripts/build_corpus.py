@@ -138,7 +138,8 @@ def main() -> int:
         for r in records:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
     with (ann / "iocs.csv").open("w", encoding="utf-8", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=["report_id", "ioc_type", "ioc_value", "malicious_label"])
+        w = csv.DictWriter(fh, fieldnames=["report_id", "ioc_type", "ioc_value", "malicious_label"],
+                           lineterminator="\n")  # LF on every OS (byte-identical regeneration in CI)
         w.writeheader()
         w.writerows(gold_iocs)
 
@@ -174,7 +175,8 @@ def main() -> int:
         relations.append({"report_id_1": a, "report_id_2": b, "relation_type": "none", "relation_label": 0})
         negatives += 1
     with (ann / "relations.csv").open("w", encoding="utf-8", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=["report_id_1", "report_id_2", "relation_type", "relation_label"])
+        w = csv.DictWriter(fh, fieldnames=["report_id_1", "report_id_2", "relation_type", "relation_label"],
+                           lineterminator="\n")
         w.writeheader()
         w.writerows(relations)
 
