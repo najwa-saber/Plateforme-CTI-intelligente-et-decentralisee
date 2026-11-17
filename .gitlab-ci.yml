@@ -143,11 +143,11 @@ ml:model-comparison:
 ml:promote-model:
   stage: ml-validation
   image: $PYTHON_IMAGE
-  needs: [ml:train-candidate]
+  needs: [{ job: ml:train-candidate, optional: true }]   # the candidate only exists when data/ML code changed
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual                                # never automatic
-  allow_failure: false
+  allow_failure: true                             # optional manual action: does not block the pipeline; the script still fails if the candidate is not promotable
   script:
     - test -f backend/app/ml/artifacts/candidates/$CI_COMMIT_SHORT_SHA/validation_report.json
     - python -c "import json,sys; r=json.load(open('backend/app/ml/artifacts/candidates/$CI_COMMIT_SHORT_SHA/validation_report.json')); sys.exit(0 if r['promotable'] else 1)"
@@ -199,6 +199,11 @@ report:summary:
   stage: report
   image: $PYTHON_IMAGE
   when: always
+  needs:                                          # automatic jobs only: manual jobs (promotion, integration) must not hold the report
+    - { job: test:python, artifacts: true }
+    - { job: test:hardhat, artifacts: false }
+    - { job: ml:data-validation, artifacts: true }
+    - { job: build:images, artifacts: false }
   script:
     - mkdir -p reports && ls -la reports docs/test-reports || true
     - echo "Pipeline $CI_PIPELINE_ID - commit $CI_COMMIT_SHA - see job artefacts for JUnit, coverage, model gate, gitleaks."
