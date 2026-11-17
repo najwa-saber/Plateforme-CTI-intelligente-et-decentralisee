@@ -185,8 +185,10 @@ integration:stack:
   script:
     - apk add --no-cache python3 py3-requests py3-pip curl
     - python3 scripts/generate_env.py
+    - export API_BIND_ADDRESS=0.0.0.0                # ports are published inside the dind service: must be reachable as docker:8000
     - docker compose up -d --build postgres hardhat backend
     - for i in $(seq 1 60); do curl -sf http://docker:8000/health && break; sleep 5; done
+    - curl -sf http://docker:8000/health || (echo "backend not reachable on docker:8000" && exit 1)
     - sed -i 's|^API_URL=.*|API_URL=http://docker:8000|' .env
     - python3 -m pip install --break-system-packages -q web3 >/dev/null 2>&1 || true
     - python3 scripts/run_demo_scenario.py

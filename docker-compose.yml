@@ -62,7 +62,7 @@ services:
       hardhat:
         condition: service_healthy
     ports:
-      - "127.0.0.1:8000:8000"
+      - "${API_BIND_ADDRESS:-127.0.0.1}:8000:8000"   # loopback by default; CI (Docker-in-Docker) sets 0.0.0.0
     networks: [cti]
     restart: unless-stopped
 
